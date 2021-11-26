@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/prints.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <script defer type="text/javascript" src="js/gallery.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="search">
+        <form action="#" method="get">
+            <input type="text" placeholder="Search for the Artist...">
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+    <div class="image-containers">
+        <div class="container">
+            <div class="overlay">
+                <div class="art heart"><i class="fa fa-heart-o nofill" aria-hidden="true"></i>
+                    <i class="fa fa-heart fill" aria-hidden="true"></i>
+                </div>
+                <div class="art title">
+                    <p>Flower Embroidery Hoop Art</p>
+                    <hr>
+                </div>
+                <div class="art artby">
+                    <div class="first">Art By:</div>
+                    <div class="second">Name</div>
+                    <div class="cost">
+                        <h2>Rs.600</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="image-display">
+        <div class="close"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+        <div class="image-fulldisplay">
+            <img src="images/art4.jpg" alt="art1">
+            <div class="info">
+                <div class="info-title"><h2>XYZ</h2></div>
+                <div class="info-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem dolores hic, quidem quam, dignissimos deserunt beatae eius, voluptatibus dicta ea voluptates magnam velit praesentium maiores!</div>
+                <div class="info-bottom">
+                    <div class="info-artist">Art By: XXX</div>
+                    <div class="info-cost">Rs.600</div>
+                </div>
+                <div class="info-add-to-cart"><button type="button" class="bt-add-to-cart">ADD TO CART</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="addart">
+        <i class="fa fa-plus fa-1" aria-hidden="true"></i>
+    </div>
+
+    <div class="addart-form">
+        <div class="close">X</div>
+        <form class="addart-actualform" action method="post">
+            <div class="formcontainer">
+            <div class="formcontainer1"><div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-controll" required />
+            </div>
+            <div class="form-group">
+                <label for="caption">Your name <span>(Artist name)</span></label>
+                <input type="text" name="caption" id="caption" class="form-controll" required />
+            </div>
+        </div>
+        <div class="formcontainer2">
+            <div class="form-group">
+                <label for="cost">Cost<span>(In Rupees)</span></label>
+                <input type="text" name="cost" id="cost" class="form-controll" required />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" class="form-controll" required />
+            </div>
+        </div>
+        </div>
+            <div class="form-group file-area">
+                <label for="images">Images <span>(Your images should be at least 400x300 wide)</span></label>
+                <input type="file" name="images" id="images" required="required" />
+                <div class="file-dummy">
+                    <div class="success">Great, your file is selected.</div>
+                    <div class="default">Please upload an image</div>
+                </div>
+            </div>
+
+            <div class="form-group form-button">
+                <button type="submit">Upload your art</button>
+                <div class="hoverbar"></div>
+            </div>
+
+        </form>
+
+
+    </div>
+</body>
+
+</html>

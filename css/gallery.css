@@ -17,7 +17,7 @@
   --font4:'Work Sans', sans-serif;
 }
 
-body {
+* {
   /* background-color: $bg; */
   margin: 0;
   padding: 0;
@@ -40,6 +40,9 @@ body {
 }
 .search button{
   font-size: 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .image-containers{
@@ -125,6 +128,7 @@ body {
 
 
 .artby {
+  margin-top:10px;
   font-size: 20px;
   line-height: 10px;
   font-weight: bold;  
@@ -139,7 +143,7 @@ body {
     width:max-content;
     height:max-content;
     padding:5% 5% 5% 1%;
-    margin:0 0 7% 0;
+    margin:0 0 5% 0;
     font-family: var(--font22);
     font-size: 22px;
 }
@@ -147,7 +151,9 @@ body {
     font-style: italic;
     font-weight: normal;
     font-family: var(--font1);
+    margin:0 0 5% 0;
 }
+
 
 .container:hover .overlay {
   opacity: 1;
@@ -193,7 +199,7 @@ body {
 
 .image-display .image-fulldisplay{
   display:flex;
-  justify-content:center;
+  justify-content:space-around;
   position: absolute;
   /* z-index: 3; */
   top:50%;
@@ -364,7 +370,7 @@ body {
   transform: scale(1);
 }
 
-button {
+.form-button button{
   padding: 8px 10px 0 10px;
   background: rgba(255,255,255,0.8);
   color: #053777;
