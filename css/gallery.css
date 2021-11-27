@@ -178,7 +178,7 @@
    position:fixed;
    width:100vw;
    height:100vh;
-   z-index:3!important;
+   z-index:10!important;
    background-color:white;
    top:0;
    transform: scaleY(0);
@@ -239,7 +239,7 @@
   width:100vw;
   height:100vh;
   top:0;
-  z-index:4;
+  z-index:10;
   background-color:white;
   justify-content:center;
   align-items:center;
