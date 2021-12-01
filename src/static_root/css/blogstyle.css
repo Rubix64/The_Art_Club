@@ -1,0 +1,133 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.blog_container{
+    margin:50px;
+    
+}
+.blog_image img{
+   width: 750px;
+   object-fit: cover;
+   border-radius:5px;
+  
+   height: 355px;
+    z-index: 1;
+    /*box-shadow: -7px -7px 10px rgba(168, 168, 168, 0.712);*/
+    box-shadow: -7px -7px 10px rgba(0, 0, 0, 0.917);
+}
+.blog_image{
+    position:absolute;
+}
+.blog_data_part{
+ width:350px;
+ height:280px;
+ border-color: rgb(155, 147, 147);
+ z-index: 2;
+ position:relative;
+ top:170px;
+ left:550px;
+ border-radius:5px;
+ background-color: white;
+ /*border:2px solid brown;*/
+ padding: 20px;
+ text-align:center;
+ letter-spacing: 1px;
+ line-height: 1.5rem;
+ display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    margin-right:40px ;
+   /* box-shadow: -7px -7px 10px rgba(0, 0, 0, 0.917);*/
+}
+
+
+.blog_data_part button{
+    border-color:rgb(155, 147, 147) ;
+    border-radius: 5px;
+    /*border:2px solid brown;*/
+    margin-top:10px;
+    padding:10px;
+    text-align:center;
+    margin-top: 10px;
+    background-color: white;
+
+}
+.blog_data_part h1{
+    margin-bottom: 20px;
+}
+.fa-heart{
+    color: red;
+    float: right;
+    margin-bottom: 2px;
+ 
+}
+li{
+    list-style-type: none;
+}
+
+@media screen and (max-width:1000px)
+{.blog_image img{
+    width: 550px;
+    height: 355px;
+ }
+ .blog_data_part{
+  width:290px;
+  height:350px;
+  top:170px;
+  left:400px;
+     
+ }
+ 
+}
+@media screen and (max-width:750px)
+{.blog_image img{
+    width: 500px;
+    height: 480px;
+ }
+ .blog_data_part{
+  width:280px;
+  height:350px;
+  top:210px;
+  left:350px; 
+ }
+ 
+}
+@media screen and (max-width:444px)
+{.blog_image img{
+    width: 350px;
+    height: 470px;
+     
+ }
+ .blog_container{
+     margin: 30px;
+ }
+ .blog_data_part{
+  width:230px;
+  height:380px;
+  top:220px;
+  left:150px;
+ }
+ 
+}
+
+@media screen and (max:280px)
+{.blog_image img{
+    width: 300px;
+    height: 470px;
+     
+ }
+ .blog_container{
+     margin: 30px;
+ }
+ .blog_data_part{
+  width:230px;
+  height:350px;
+  top:220px;
+  left:120px;
+ }
+ 
+}

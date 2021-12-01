@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+:root{
+    --welcome-font:'WindSong', cursive;
+    --quote:'Work Sans', sans-serif;
+    --para-header:'Dancing Script', cursive;
+    --background-shade:#412801;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    width:100vw;
+    background-color:rgb(255, 255, 255);
+    padding:30px 10px;
+    margin:auto;
+}
+
+/* welcome grid */
+
+.welcome{
+    cursor:default;
+     user-select: none;
+    background-color:rgb(26, 21, 0);
+    position: relative;
+    --width:calc(80vw - 40px);
+    margin:20px auto;
+    padding:30px;
+    width:max-content;
+    height:max-content;
+    /* border-radius:calc((100vw - 40px) / 2); */
+    /* box-shadow: 0 0 0 10vw rgb(49, 41, 4); */
+}
+.welcome .text-welcome{
+    --side-length:calc((var(--width) - 6 * 10px) / 8 );
+    --color:rgb(0, 217, 255);
+    background-color:rgba(255, 255, 255, 0.74);
+    padding:10px;
+    transform:translate(-30vw,calc(var(--side-length) * 2.5)) rotate(-90deg) ;
+    position:absolute;
+    
+}
+.welcome .text-welcome .text-wel{
+    text-align:right;
+    transform:translateX(-40px);
+    font-family: var(--welcome-font);
+    font-size:calc((var(--width) - 6 * 10px) / 12 );
+    font-weight: 900;
+    color:var(--color);
+}
+.welcome .text-welcome .text-underline{
+    width:calc(var(--side-length) * 6);
+    height:5px;
+    background-color:var(--color) ;
+}
+.welcome .quote{
+    --side-length:calc((var(--width) - 6 * 10px) / 8 );
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.788);
+    color:white;
+    font-family: var(--quote);
+    font-size:40px;
+    width:35vw;
+    padding:var(--side-length) 20px;
+    transform: translate(2.8vw,calc(var(--side-length) * 1.5));
+    z-index: 2;
+}
+.welcome .artist{
+    --side-length:calc((var(--width) - 6 * 10px) / 8 );
+    position: absolute;
+    background-color:white;
+    padding:15px 10px;
+    transform: translateY(calc(var(--side-length) * 5));
+}
+.welcome .artist .person{
+    font-size:1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    text-align: right;
+    padding-right:calc((var(--width) - 60px) / 10) ;
+}
+.welcome .artist .text-underline{
+    width:calc(var(--width) - 60px);
+    height:3px;
+    background-color: rgb(255, 208, 0);
+}
+.welcome .images{
+    --side-length:calc((var(--width) - 6 * 10px) / 12 );
+    display:grid;
+    grid-template-columns: repeat(12,var(--side-length));
+    grid-auto-rows: calc(var(--side-length) / 1.25 );
+     grid-gap: 10px;
+    grid-template-areas:
+    ". . .   abstract  abstract  abstract brain brain  brain . . ."
+    "creativity creativity creativity abstract abstract abstract brain brain brain linecolor linecolor linecolor"
+    "creativity creativity  creativity abstract abstract abstract brain brain brain linecolor linecolor linecolor"
+    "creativity creativity creativity .  surrealism surrealism surrealism face face face femalewarrior femalewarrior"
+    ". cubicles cubicles cubicles  surrealism surrealism surrealism face face face femalewarrior femalewarrior"
+    ". cubicles cubicles cubicles  surrealism surrealism surrealism . lotuspeople lotuspeople femalewarrior femalewarrior"
+    ".  cubicles cubicles cubicles . eye eye eye lotuspeople lotuspeople femalewarrior femalewarrior"
+    "woman woman woman woman woman eye eye eye lotuspeople lotuspeople ladder ladder"
+    "woman woman woman woman woman eye eye eye lotuspeople lotuspeople ladder ladder"
+    "woman woman woman woman woman  eye eye eye  . . ladder ladder"
+}
+
+.welcome .images figure{
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: .5vw solid white; */
+    border-radius:5px;
+}
+@media screen and (max-width:800px){
+    .welcome .text-welcome{
+        transform:translate(calc(-1 *(80vw - 100px)),calc(var(--side-length) * 6)) rotate(-90deg) ;
+    }
+    .welcome .text-welcome .text-wel{
+        font-size:calc((var(--width) - 6 * 10px) / 8 );
+    }
+    .welcome .text-welcome .text-underline{
+        width:calc(var(--side-length) * 15);
+    }
+    .welcome .quote{
+        font-size:5vw;
+    }
+    .welcome .artist{
+        transform: translateY(calc(var(--side-length) * 11));
+    }
+    .welcome .images{
+        --side-length:calc((var(--width) - 6 * 10px) / 8 );
+        display:grid;
+        grid-template-columns: repeat(8,var(--side-length));
+        grid-auto-rows: calc(var(--side-length) );
+        grid-gap: 10px;
+        grid-template-areas: 
+        ". cubicles cubicles linecolor linecolor linecolor linecolor ."
+        ". cubicles cubicles linecolor linecolor linecolor linecolor ."
+        "face face face face face femalewarrior femalewarrior femalewarrior"
+        "face face face face face femalewarrior femalewarrior femalewarrior"
+        "creativity creativity creativity abstract abstract femalewarrior femalewarrior femalewarrior"
+        "creativity creativity creativity abstract abstract femalewarrior femalewarrior femalewarrior"
+        ". . lotuspeople lotuspeople surrealism surrealism surrealism surrealism"
+        "brain brain lotuspeople lotuspeople surrealism surrealism surrealism surrealism"
+        "brain brain lotuspeople lotuspeople eye eye eye ."
+        "woman woman woman woman eye eye eye ."
+        "woman woman woman woman ladder ladder ladder ."
+        ". . . . ladder ladder ladder ."
+        ;
+    }
+    .welcome .images figure{
+        border-radius:3px;
+    }
+}
+.img-1{
+    background-image: url("../images/art images/abstract.jpeg");
+    grid-area: abstract;
+}
+.img-2{
+    background-image: url("../images/art images/brain.jpeg");
+    grid-area: brain;
+}
+.img-3{
+    background-image: url("../images/art images/linecolor.jpg");
+    grid-area: linecolor;
+}
+.img-4{
+    background-image: url("../images/art images/creativity-illo.jpg");
+    grid-area: creativity;
+}
+.img-5{
+    background-image: url("../images/art images/face.jpeg");
+    grid-area: face;
+}
+.img-6{
+    background-image: url("../images/art images/femalewarrior.jpeg");
+    grid-area: femalewarrior;
+}
+.img-7{
+    background-image: url("../images/art images/lotuspeople.jpeg");
+    grid-area: lotuspeople;
+}
+.img-8{
+    background-image: url("../images/art images/cubicles.jpeg");
+    grid-area: cubicles;
+}
+.img-9{
+    background-image: url("../images/art images/Surrealism-Art.jpg");
+    grid-area: surrealism;
+}
+.img-10{
+    background-image: url("../images/art images/ladder.jpeg");
+    grid-area: ladder;
+}
+.img-11{
+    background-image: url("../images/art images/woman.jpeg");
+    grid-area: woman;
+}
+.img-12{
+    background-image: url("../images/art images/eye.jpeg");
+    grid-area:eye;
+}
+
+/*home page down part-art container*/
+
+
+.art_message{
+    width:100vw;
+    padding:6vh 1vw;
+    margin:6vh auto;
+}
+.art_image img{
+ 
+    max-width:100%;
+     height:auto;
+    margin-left:60px;
+ }
+ @media screen and (max-width: 768px) {
+     .art_image img{
+  
+         max-width:100%;
+         height:auto;
+         margin-left:0px;
+      }
+ }
+ .art_message{
+     display:flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: center;
+     /*border:2px solid black;*/
+     overflow:hidden;
+     background-color:#FFEFD5;
+ }
+ .art_content{
+     max-width: 480px;
+     padding:40px;
+     margin:40px;
+     border:2px solid rgb(250, 250, 250);
+ }
+ /*.art_image{
+     /*border:2px solid black;
+    
+ }*/
+ .title-n{
+     position: relative;
+     display: block;
+     font-size: 14px;
+     line-height: 25px;
+     color: #d1af78;
+     font-weight: 400;
+     font-style: italic;
+     text-transform: capitalize;
+    font-family: 'Open Sans',sans-serif;
+     letter-spacing: 1px;
+ }
+ 
+ /**, ::after, ::before {
+      box-sizing: border-box; 
+ }*/
+ .title-n:before {
+     position: relative;
+     display: inline-block;
+     left: 0;
+     top: 0;
+     width: 130px;
+     height: 1px;
+     background-color: #d1af78;
+     content: "";
+     vertical-align: middle;
+     margin-right: 10px;
+     
+ }
+ 
+     
+ .sec-title-n{
+ position: relative;
+ font-size: 2.5rem;
+ color: var(--background-shade);
+ font-weight: 500;
+ line-height: 1.7em;
+ font-family: var(--para-header);
+ text-transform: capitalize;
+ letter-spacing: 0px;
+ 
+ }
+ .art_content p{
+     font-size:1.2em;
+     font-family:  var(--quote);
+     display: block;
+     margin-block-start: 1em;
+     margin-block-end: 1em;
+     margin-inline-start: 0px;
+     margin-inline-end: 0px;
+    
+ }
+
+ /* home second part */
+
+ .tips{
+    position: relative;
+ }
+ #tips-header2{
+     display:none;
+ }
+ .tips-header{
+     text-align:center;
+     padding:10vh 30px;
+    margin:5vh 5vw -5vw 5vw;
+    font-family: var(--quote);
+    /* box-shadow: 0px 2px 20px 0 #d1af78; */
+    width:80vw;
+ }
+ .tips-header p{
+    word-wrap: break-word;
+    font-size: 2em;
+ }
+ .tips-header p span{
+    word-wrap: break-word;
+    white-space: nowrap;
+     color: #d1af78;
+ }
+ .tips-header p span:first-child{
+     font-size:2em;
+ }
+ .tips-header p span:last-child{
+     font-weight: bold;
+     font-size:2em;
+     color:var(--background-shade);
+ }
+ @media screen and (min-width:1251px){
+    #tips-header1{
+        display: none; 
+    }
+    #tips-header2{
+        display: block;
+    }
+    .tips-header{
+        margin:5vh 5vw;
+        padding: 10vh 20px;
+        width:max-content;
+        right:-10vw;
+    }
+ }
+ .tips_container img{
+    width:150px;
+    border-radius: 50%;
+    height:150px;
+    position:absolute;
+    margin: -20px 0 180px 180px;
+    z-index: 2;
+    background-position: center ;
+    background-repeat: no-repeat;
+    border:0.1px solid  #e2bf86;
+    
+   }
+   .content_box{
+       --width:250px;
+       width:var(--width);
+       min-height: calc(100vh / 6);
+       max-height:max-content;
+       padding:20px;
+       position:relative;
+       z-index: 1;
+       box-shadow: -15px 15px 10px  #e2bf86;
+       /*box-shadow: 200px 20px rgb(84, 174, 248);*/
+       /*box-shadow:20px 20px 10px grey;  */
+       /*border:2px solid black;*/
+       margin: 60px;
+       border: 0.1px solid #e2bf86/*rgba(0, 0, 0, 0.246)*/;
+      border-radius: 0 0 0 calc(var(--width) / 4);
+   }
+   .content_box p{
+    /* z-index: ; */
+    position:relative;
+    width:155px;
+    padding: 20px;
+    font-family: var(--quote);
+    font-weight: 600;
+    line-height:150%;
+   
+   }
+   @media screen and (min-width:433px){
+   .tips_container{
+       display:flex;
+       justify-content:center;
+       flex-direction:row;
+       align-items:center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding:60px;
+        background-color:white;
+   }
+   }
+   @media screen and (max-width:433px){
+       .tips_container img{
+           width:100px;
+           border-radius: 50%;
+           height:100px;
+           position:absolute;
+           margin: -20px 0 130px 160px;
+           z-index: 2;
+           background-position: center ;
+           background-repeat: no-repeat;
+           border:0.1px solid  #e2bf86;
+           
+          }
+          .content_box{
+           width:200px;
+           height:max-content;
+           position:relative;
+           z-index: 1;
+           box-shadow: -15px 15px 10px  #e2bf86;
+           /*box-shadow: 200px 20px rgb(84, 174, 248);*/
+           /*box-shadow:20px 20px 10px grey;  */
+           /*border:2px solid black;*/
+           margin: 50px;
+           border: 0.1px solid #e2bf86/*rgba(0, 0, 0, 0.246)*/;
+          
+       }
+       .tips_container{
+           display:flex;
+           justify-content:center;
+           flex-direction:row;
+           align-items:center;
+            flex-wrap: wrap;
+            padding-top: 60px;
+            background-color:white;
+       }
+   }
+   
+  

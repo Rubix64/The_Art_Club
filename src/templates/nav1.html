@@ -1,0 +1,121 @@
+ <!-- nav bar 1 -->
+
+ <nav class="nav-bar">
+    <div class="nav-left">
+        <div class="logo"><a href="" style="text-decoration: none; color:black;">Some</a></div>
+    </div>
+    <div class="links">
+        {% if user.is_authenticated %}
+        <div class="link">
+            <a href="logout/?url={{request.build_absolute_uri}}">
+                LOGOUT
+            </a>
+            <div class="bar"></div>
+        </div>
+        {% else %}
+        <div class="link" id="loginlink">
+            <a>LOGIN</a>
+            <div class="bar"></div>
+        </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <div class="link" id="settingslink">
+            <a ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
+            <div class="bar"></div>
+        </div>
+        {% else %}
+        <div class="link" id="signuplink">
+            <a >SIGN UP</a>
+            <div class="bar"></div>
+        </div>
+        {%endif%}
+        <div class="link"><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>(0)</a><div class="bar"></div></div>
+    </div>
+</nav>
+
+<!-- login form -->
+
+<div class="login" id='login'>
+    <div id="X1" class="X">X</div>
+    <h2>Login</h2>
+    <form class="loginform" method="post" action="." name="loginform" >
+    {% csrf_token %}
+        <div class="inputlogin">
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="wrong">
+            {% if username%}
+            <script>
+            var wrongs=document.querySelectorAll("#login .loginform .wrong");
+            wrongs[0].style.display ='block';
+            </script>
+            {{username}}
+            {% endif %}
+        </div>
+        <div class="inputlogin">
+            <input type="password" name="password" placeholder="Enter password" autocomplete="off" required>
+        </div>
+        <div class="wrong">
+            {% if password%}
+            <script>
+            var wrongs=document.querySelectorAll("#login .loginform .wrong");
+            wrongs[1].style.display ='block';
+            </script>
+            {{password}}
+            {% endif %}
+        </div>
+        <button type="submit" class="submitbutton" name="loginform">LOGIN</button>
+    </form>
+    <p><a href="#" id="forgotpwd">Forgot Password?</a></p>
+</div>
+
+<!-- Sign up form -->
+
+<div class="login" id="signup">
+    <div id="X2" class="X">X</div>
+    <h2>Sign up</h2>
+    <form class="loginform" method="post" action="." name="signupform" onsubmit="return signupvalidate()" >
+    {% csrf_token %}
+        <div class="inputlogin">
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="wrong">
+            {% if username%}
+            <script>
+            var wrongs=document.querySelectorAll("#signup .loginform .wrong");
+            wrongs[0].style.display ='block';
+            </script>
+            {{username}}
+            {% endif %}
+        </div>
+        <div class="inputlogin">
+            <input type="email" name="email" placeholder="Enter email" required>
+        </div>
+        <div class="wrong">
+            {% if email%}
+            <script>
+            var wrongs=document.querySelectorAll("#signup .loginform .wrong");
+            wrongs[1].style.display ='block';
+            </script>
+            {{email}}
+            {% endif %}
+        </div>
+        <div class="inputlogin">
+            <input type="password" name="password" placeholder="Enter password" required autocomplete="off">
+        </div>
+        <div class="wrong"></div>
+        <div class="inputlogin">
+            <input type="password" name="confirmpassword" placeholder="Confirm password" autocomplete="off" required>
+        </div>
+        <div class="wrong">
+            {% if password%}
+            <script>
+            var wrongs=document.querySelectorAll("#signup .loginform .wrong");
+            wrongs[3].style.display ='block';
+            </script>
+            {{password}}
+            {% endif %}
+        </div>
+        <button type="submit" class="submitbutton" name="signupform">SIGN UP</button>
+    </form>
+</div>

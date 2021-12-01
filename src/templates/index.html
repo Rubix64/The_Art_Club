@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{%block links%}
+<link rel="stylesheet" href="{% static 'css/home.css' %} ">
+{%endblock%}
+
+{% block scripts%}
+{%endblock%}
+
+{% block content %}
+    <div class="background-image"></div>
+
+    {% include 'title_nav2.html' %}
+    
+
+        <!-- END OF NAVIGATION WITH TITLE -->
+
+    <main>
+        <section class="welcome">
+            <div class="text-welcome">
+                <div class="text-wel">Welcome</div>
+                <div class="text-underline"></div>
+            </div>
+            <div class="quote">"It is only when we are no longer fearful that we begin to create."</div>
+            <div class="artist">
+                <div class="person">―  J. M. W. Turner</div>
+                <div class="text-underline"></div>
+            </div>
+            <div class="images">
+                <figure class="img-1"></figure>
+                <figure class="img-2"></figure>
+                <figure class="img-3"></figure>
+                <figure class="img-4"></figure>
+                <figure class="img-5"></figure>
+                <figure class="img-6"></figure>
+                <figure class="img-7"></figure>
+                <figure class="img-8"></figure>
+                <figure class="img-9"></figure>
+                <figure class="img-10"></figure>
+                <figure class="img-11"></figure>
+                <figure class="img-12"></figure>   
+            </div>
+        </section>
+        <div class="art_message">
+                <div class="art_content">
+                    <h6>
+                        <span class="title-n">extrodinary & select Art Website
+                        </span>
+                        <span class="sec-title-n">Buy Original abstract art Online</span>
+                    </h6>
+                   
+                   <p>It is content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their def many web sites still in their infancy. </p>
+                </div>
+                <div class="art_image">
+                   
+                  <img src="{% static 'images/sideimage.webp' %}" width="550px" height="550px" >
+                </div>
+        </div>
+        
+        <div class="tips">
+            <div id="tips-header1" class="tips-header"><p><span>T</span>IPS OF THE <span>WEEK</span></p></div>
+            <div class="tips_container">
+                <div id="tips-header2" class="tips-header"><p><span>T</span>IPS OF THE <span>WEEK</span></p></div>
+                <div class="first_tip">
+                    <img src="{% static 'images/brush.jpg' %}">
+                    <div class="content_box">
+                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi iste magnam placeat odit! Hic ex deleniti itaque eos dolore voluptatum inventore, neque sequi laborum.</p>
+                    </div>
+                </div>
+                <div class="Second_tip">
+                    <img src="{% static 'images/paint.jpg' %}">
+                    <div class="content_box">
+                       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium facere veniam minus maiores, reiciendis quasi! Labore aliquid tempora itaque ex eligendi animi veniam assumenda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--home page remaing part-->
+    
+    {% endblock content %}
