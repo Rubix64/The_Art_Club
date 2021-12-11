@@ -131,6 +131,18 @@ nav.nav-bar div.links a{
     text-align: center;
     margin:10px;
 }
+
+.login #loginloaderror{
+    padding:5px;
+    margin-left: 1vw;
+    font-size:16px;
+    color: rgb(230, 36, 94);
+    font-family: var(--font4);
+    font-weight: bold;
+    display: none;
+    overflow-wrap: wrap;
+}
+
 .login .loginform{
     margin:20px 1vw 10px 1vw;
 }

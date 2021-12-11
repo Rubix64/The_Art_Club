@@ -37,23 +37,25 @@ X2.addEventListener('click', ()=>{
 
 let signupform=document.forms["signupform"];
 let wrong=document.querySelectorAll("#signup .loginform .wrong");
-function signupvalidate(){
-    let pwd=signupform["password"].value;
-    let confirmpwd=signupform["confirmpassword"].value;
-    wrong.forEach(element => {
-        element.style.display='none';
-    });
-    if(pwd.length<8){
-        wrong[2].innerHTML="Password must aleast be of 8 characters";
-        wrong[2].style.display="block";
-        return false;
-    }
-    else if(pwd != confirmpwd){
-        wrong[3].innerHTML="Password doesn't match";
-        wrong[3].style.display='block';
-        return false;
-    }
-    else{
-        return true;
-    }
-}
+
+// function signupvalidate(){
+//     let pwd=signupform["password"].value;
+//     let confirmpwd=signupform["confirmpassword"].value;
+//     wrong.forEach(element => {
+//         element.style.display='none';
+//     });
+//     if(pwd.length<8){
+//         wrong[2].innerHTML="Password must aleast be of 8 characters";
+//         wrong[2].style.display="block";
+//         return false;
+//     }
+//     else if(pwd != confirmpwd){
+//         wrong[3].innerHTML="Password doesn't match";
+//         wrong[3].style.display='block';
+//         return false;
+//     }
+//     else{
+//         return true;
+//     }
+// }
+
