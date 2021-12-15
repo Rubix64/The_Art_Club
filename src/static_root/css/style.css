@@ -13,6 +13,9 @@
     --font22:'Dancing Script', cursive;
     --font3:'WindSong', cursive;
     --font4:'Work Sans', sans-serif;
+    --welcome-font:'WindSong', cursive;
+    --quote:'Work Sans', sans-serif;
+    --para-header:'Dancing Script', cursive;
     --bar-width:25px;
     --bar-height:2px;
     --bar-margin:5px;
@@ -106,7 +109,7 @@ nav.nav-bar div.links a{
     min-width:25vw;
     --color:rgba(14, 1, 1, 0.596);
     display:none;
-    z-index:10;
+    z-index: 15 !important;;
     background-color:rgb(255, 255, 255);
     position: fixed;
     top:50%;

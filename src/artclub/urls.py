@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
 from .views import *
 
@@ -26,7 +26,9 @@ urlpatterns = [
     path('', index),
     path('signup/', signup_view),
     path('login/', login_view),
-    path('logout/',logout_view)
+    path('logout/',logout_view),
+    path('prints/',include('prints.urls')),
+    path('cart/', include('cart.urls')),
 ]
 
 # if settings.DEBUG:

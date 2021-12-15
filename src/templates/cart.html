@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{%block links%}
+<link rel="stylesheet" href="{% static 'css/cart.css' %} ">
+{%endblock%}
+
+{% block scripts%}
+
+{%endblock%}
+
+{% block content %}
+    <div class="background-image"></div>
+
+    {% include 'title_nav2.html' %}
+    
+
+        <!-- END OF NAVIGATION WITH TITLE -->
+    <main>
+    {% if not user.is_authenticated%}
+        <div class="cart-message">Please login in to see the contents of your cart.</div>
+    {% elif nodata%}
+        <div class="cart-message">You didn't add anything to your cart yet.</div>
+    {% else %}
+        <div class="cart-total">
+            <div class="cart-totcost">TOTAL: <span>Rs.{{totcost}}</span></div>
+            <button type="button">CHECKOUT >>> </button>
+        </div>
+        <hr class="cart-hr">
+        <div class="cart-containers">
+            {%for cart_item in cart_items%}
+            <div class="cart-container">
+                <div class="cart-remove">X</div>
+                <div class="cart-img" style="background-image: url('{{cart_item.print.print_image.url}}');"></div>
+                <div class="cart-tag">
+                    <div class="artby">{{cart_item.user.first_name}}</div>
+                    <div class="title">{{cart_item.print.title}}</div>
+                    <div class="cost">Rs.{{cart_item.print.cost}}</div>
+                    <div class="qty">
+                        <span>+</span>
+                        <p> {{cart_item.qty}} </p>
+                        <span>-</span>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            <div class="cart-container">
+                <div class="cart-remove">X</div>
+                <div class="cart-img"></div>
+                <div class="cart-tag">
+                    <div class="artby">NAME</div>
+                    <div class="title">lorem ipson dolor</div>
+                    <div class="cost">Rs.660</div>
+                    <div class="qty">
+                        <span>+</span>
+                        <p> 1 </p>
+                        <span>-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-container">
+                <div class="cart-remove">X</div>
+                <div class="cart-img"></div>
+                <div class="cart-tag">
+                    <div class="artby">NAME</div>
+                    <div class="title">lorem ipson dolor</div>
+                    <div class="cost">Rs.660</div>
+                    <div class="qty">
+                        <span>+</span>
+                        <p> 1 </p>
+                        <span>-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-container">
+                <div class="cart-remove">X</div>
+                <div class="cart-img"></div>
+                <div class="cart-tag">
+                    <div class="artby">NAME</div>
+                    <div class="title">lorem ipson dolor</div>
+                    <div class="cost">Rs.660</div>
+                    <div class="qty">
+                        <span>+</span>
+                        <p> 1 </p>
+                        <span>-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-container">
+                <div class="cart-remove">X</div>
+                <div class="cart-img"></div>
+                <div class="cart-tag">
+                    <div class="artby">NAME</div>
+                    <div class="title">lorem ipson dolor</div>
+                    <div class="cost">Rs.660</div>
+                    <div class="qty">
+                        <span>+</span>
+                        <p> 1 </p>
+                        <span>-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </main>
+    
+<!-- Footer section -->
+{%endblock content %}

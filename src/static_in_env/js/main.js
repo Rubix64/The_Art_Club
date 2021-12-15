@@ -9,12 +9,6 @@ menuIcon.addEventListener("click",()=>{
     menuMobile.classList.toggle("anim-mobile-right");
 })
 
-if(window.innerWidth >= 1251){
-    // console.log('aaa');
-    let tipsHeader=document.querySelector(".tips .tips_container .tips-header");
-    tipsHeader.innerHTML='<p><span>T</span>IPS OF THE <br><span>WEEK</span></p>';
-}
-
 let loginlink=document.getElementById("loginlink");
 let login=document.getElementById("login");
 let X1=document.getElementById("X1");

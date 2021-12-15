@@ -2,12 +2,12 @@
 
  <nav class="nav-bar">
     <div class="nav-left">
-        <div class="logo"><a href="" style="text-decoration: none; color:black;">Some</a></div>
+        <div class="logo"><a href="/" style="text-decoration: none; color:black;">Home</a></div>
     </div>
     <div class="links">
         {% if user.is_authenticated %}
         <div class="link">
-            <a href="logout/?url={{request.build_absolute_uri}}">
+            <a href="/logout/?url={{request.build_absolute_uri}}">
                 LOGOUT
             </a>
             <div class="bar"></div>
@@ -29,7 +29,19 @@
             <div class="bar"></div>
         </div>
         {%endif%}
-        <div class="link"><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>(0)</a><div class="bar"></div></div>
+        <div class="link">
+            <a href="/cart/">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span id="no_of_contents">
+                {%if user.is_authenticated%}
+                    ({{no_of_contents}})
+                {%else%}
+                    (0)
+                {%endif%}
+                </span>
+            </a>
+            <div class="bar"></div>
+        </div>
     </div>
 </nav>
 
@@ -112,7 +124,7 @@
             if(checkvalidity){
                 $data = $(this).serialize();
                 $.ajax({
-                    url: 'signup/',
+                    url: '/signup/',
                     method:"POST",
                     data: $data,
                     dataType: 'json',
@@ -150,7 +162,7 @@
             event.preventDefault();
             $data = $(this).serialize();
             $.ajax({
-                url: 'login/',
+                url: '/login/',
                 method: 'POST',
                 data: $data,
                 dataType: 'json',

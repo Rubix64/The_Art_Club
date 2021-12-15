@@ -17,11 +17,25 @@
   --font4:'Work Sans', sans-serif;
 }
 
-body {
+* {
   /* background-color: $bg; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.nocontent{
+  font-size:30px;
+  font-family: var(--font4);
+  padding:20px 20px;
+ text-align: center;
+}
+
+main {
+  width:100vw;
+  background-color:rgb(255, 255, 255);
+  padding:30px 10px;
+  margin:auto;
 }
 
 .search{
@@ -128,6 +142,7 @@ body {
 
 
 .artby {
+  margin-top:10px;
   font-size: 20px;
   line-height: 10px;
   font-weight: bold;  
@@ -142,7 +157,7 @@ body {
     width:max-content;
     height:max-content;
     padding:5% 5% 5% 1%;
-    margin:0 0 7% 0;
+    margin:0 0 5% 0;
     font-family: var(--font22);
     font-size: 22px;
 }
@@ -150,7 +165,9 @@ body {
     font-style: italic;
     font-weight: normal;
     font-family: var(--font1);
+    margin:0 0 5% 0;
 }
+
 
 .container:hover .overlay {
   opacity: 1;
@@ -175,7 +192,7 @@ body {
    position:fixed;
    width:100vw;
    height:100vh;
-   z-index:3!important;
+   z-index:10!important;
    background-color:white;
    top:0;
    transform: scaleY(0);
@@ -196,7 +213,7 @@ body {
 
 .image-display .image-fulldisplay{
   display:flex;
-  justify-content:center;
+  justify-content:space-around;
   position: absolute;
   /* z-index: 3; */
   top:50%;
@@ -236,7 +253,7 @@ body {
   width:100vw;
   height:100vh;
   top:0;
-  z-index:4;
+  z-index:10;
   background-color:white;
   justify-content:center;
   align-items:center;
@@ -360,7 +377,7 @@ body {
   height:1.5px;
   margin-top: 3px;;
   transition: transform .3s ease-in-out;
-  background-color:  #053777;
+  background-color:  var(--background-shade);
 }
 
 .form-button:hover .hoverbar{
@@ -370,7 +387,7 @@ body {
 .form-button button{
   padding: 8px 10px 0 10px;
   background: rgba(255,255,255,0.8);
-  color: #053777;
+  color: var(--background-shade);
   text-transform: uppercase;
   font-weight: 600;
   font-size: 13px;
