@@ -92,7 +92,7 @@ main {
   position: relative;
 }
 
-.cart-containers .cart-container .cart-remove {
+.cart-containers .cart-container .cart-delete {
   position: absolute;
   z-index: 1;
   background-color: white;

@@ -170,7 +170,7 @@
                         disabled required />
                 </div>
                 <div class="form-group">
-                    <label for="cost">Cost<span>(In Rupees)</span></label>
+                    <label for="cost">Cost<span> (In Rupees (&lt; 100000))</span></label>
                     <input type="text" name="cost" id="cost" class="form-controll" required />
                     <div id='costerror' class="wrong"></div>
                 </div>
@@ -217,6 +217,7 @@
                                 location.reload();
                             }
                             else {
+                                $formwrong = $('#formaddart #formerror');
                                 if (data.hasOwnProperty('cost')) {
                                     $costwrong = $('.formcontainer .form-group .wrong');
                                     $costwrong.css('display', 'block');
@@ -227,10 +228,13 @@
                                     $imagewrong.css('display', 'block');
                                     $imagewrong.html(data.print_image);
                                 }
-                                else {
-                                    $formwrong = $('#formaddart #formerror');
+                                else if (data.hasOwnProperty('title')){
                                     $formwrong.css('display', 'block');
-                                    $formwrong.html('Please recheck ur submission!');
+                                    $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
+                                }
+                                else if(data.hasOwnProperty('cost')){
+                                    $formwrong.css('display', 'block');
+                                    $formwrong.html('Cost must be less than Rs.100000!');
                                 }
                             }
 

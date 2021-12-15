@@ -55,12 +55,79 @@ def cartadd(request):
                 Cart.objects.filter(user=request.user,print=printobj).update(qty=qt)
             data['success']=True
             data['totalqty']=no_of_contents(request.user)
+            cart_items=Cart.objects.filter(user=request.user)
+            cost=0
+            for cart_item in cart_items:
+                cost+=cart_item.qty*cart_item.print.cost
+            data['totcost']=cost
+            print(cost)
         else:
             data['success']=False
     else:
         data['success']=False
     return JsonResponse(data)
 
-
+def cartremove(request):
+    data={}
+    if not request.user.is_authenticated:
+        data['loggedin']=False
+        return JsonResponse(data)
+    data['loggedin'] = True
+    if request.user and request.is_ajax and request.method == 'GET':
+        # print(request.GET.get('printid'))
+        printid=int(request.GET.get('printid'))
+        if Print.objects.filter(id=printid).exists():
+            printobj=Print.objects.filter(id=printid)[0]
+            content=Cart.objects.filter(user=request.user,print=printobj).first()
+            if content is None:
+                pass
+            elif content.qty<2:
+                pass
+            else:
+                qt=content.qty
+                qt=qt-1
+                # print(qt)
+                Cart.objects.filter(user=request.user,print=printobj).update(qty=qt)
+            data['success']=True
+            data['totalqty']=no_of_contents(request.user)
+            cart_items=Cart.objects.filter(user=request.user)
+            cost=0
+            for cart_item in cart_items:
+                cost+=cart_item.qty*cart_item.print.cost
+            data['totcost']=cost
+            print(cost)
+        else:
+            data['success']=False
+    else:
+        data['success']=False
+    return JsonResponse(data)
         
-            
+def cartdelete(request):
+    data={}
+    if not request.user.is_authenticated:
+        data['loggedin']=False
+        return JsonResponse(data)
+    data['loggedin'] = True
+    if request.user and request.is_ajax and request.method == 'GET':
+        # print(request.GET.get('printid'))
+        printid=int(request.GET.get('printid'))
+        if Print.objects.filter(id=printid).exists():
+            printobj=Print.objects.filter(id=printid)[0]
+            content=Cart.objects.filter(user=request.user,print=printobj).first()
+            if content is None:
+                pass
+            else:
+                Cart.objects.filter(user=request.user,print=printobj).delete()
+            data['success']=True
+            data['totalqty']=no_of_contents(request.user)
+            cart_items=Cart.objects.filter(user=request.user)
+            cost=0
+            for cart_item in cart_items:
+                cost+=cart_item.qty*cart_item.print.cost
+            data['totcost']=cost
+            print(cost)
+        else:
+            data['success']=False
+    else:
+        data['success']=False
+    return JsonResponse(data)         
