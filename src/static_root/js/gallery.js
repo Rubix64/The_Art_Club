@@ -72,7 +72,7 @@ let imageDisplay=document.querySelectorAll('.image-display');
 let imgDisplayClose=document.querySelectorAll('.image-display .close');
 let success = document.querySelector('.image-display .image-fulldisplay .info .info-success');
 imgDisplayClose[0].addEventListener('click', ()=>{
-    success.innerHTML="";
+    success.innerHTML="ooo";
     imageDisplay[0].classList.remove('image-display-show');
 })
 

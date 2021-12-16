@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include "bloghead.html" %}
-    <title>Gallery</title>
+{% extends 'base.html' %}
 
-</head>
+{% load static %}
 
-<body>
-  
+{%block links%}
+<!-- <link rel="stylesheet" href="{% static 'css/prints.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock links%}
+
+{%block scripts%}
+<script defer type="text/javascript" src="{% static 'js/gallery.js'%}"></script>
+{%endblock scripts%}
+
+{% block content %}
+<div class="background-image"></div>
+
+{% include 'title_nav2.html' %}
+<main>
+    {% if nodata %}
+    <div class="nocontent">Sorry! There isn't any content here!</div>
+    {% else %}
+
     <div class="search">
         <form action="#" method="get">
             <input type="text" placeholder="Search for the Artist...">
@@ -18,17 +30,16 @@
     <div class="image-display">
         <div class="close"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
         <div class="image-fulldisplay">
-            <img src="" alt="art1">
+            <img src="" alt="">
         </div>
     </div>
 
     <div class="image-containers">
-        {% load static %}
         {% for gallery in galleries %}
-        <div class="container" id="{{gallery.id}}">
+        <div class="container" id="{{gallery.id}}" >
             <script>
-                var container = document.getElementById('{gallery.id}}');
-                container.style.backgroundImage = `url('{{gallery.gallery_image.url}}')`;
+                var container = document.getElementById('{{gallery.id}}')
+                container.style.backgroundImage = `url('{{gallery.gallery_image.url}}')`;   
             </script>
             <div class="overlay">
                 <div class="art heart">
@@ -45,46 +56,169 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            var container = document.getElementById('{{gallery.id}}');
+            container.addEventListener('click', () => {
+                var imagedisplay = document.querySelectorAll(".image-display");
+                imagedisplay[0].classList.add('image-display-show');
+
+                var image = document.querySelector(".image-fulldisplay img");
+                image.setAttribute('src', '{{gallery.gallery_image.url}}');
+                image.setAttribute('alt', '{{gallery.title}}');
+
+                // var artby = document.querySelector(".image-fulldisplay .info .info-title");
+                // artby.innerHTML = '<h2>{{gallery.title}}</h2>';
+
+                // var printDescription = document.querySelector(".image-fulldisplay .info .info-description");
+                // printDescription.innerHTML = '{{print.description}}';
+
+                // var infobottom = document.querySelector(".image-fulldisplay .info .info-bottom");
+                // infobottom.children[0].innerHTML = 'Art By: {{print.artist.first_name}}';
+                // infobottom.children[1].innerHTML = 'Rs.{{print.cost}}';
+
+                // var addtocart = document.querySelector(".image-fulldisplay .info .info-add-to-cart");
+                // if ('{{user}}' == '{{print.artist}}') {
+                //     addtocart.style.display = 'none';
+                // }
+                // else {
+                //     addtocart.style.display = 'block';
+                //     $(document).ready(function () {
+                //         var printid = '{{print.id}}'
+                //         $('#bt-add-to-cart').unbind('click').on('click', function (event) {
+                //             // console.log(printid);
+                //             $.ajax({
+                //                 url: '/cart/cartadd/',
+                //                 type: 'GET',
+                //                 headers: {
+                //                     "X-CSRFToken": '{{csrf_token}}',
+                //                 },
+                //                 data: { 'printid': printid },
+                //                 success: function (data) {
+                //                     if (!(data.loggedin)) {
+                //                         $('#login').css('display', 'block');
+                //                     }
+                //                     else {
+                //                         $success = $('.image-fulldisplay .info .info-success');
+                //                         if (data.success) {
+                //                             $success.html('Added to the cart :)');
+                //                             $success.css('color', 'green');
+                //                             $('#no_of_contents').html('(' + data.totalqty + ')')
+                //                         }
+                //                         else {
+                //                             $success.html('An error occurred, retry...');
+                //                             $success.css('color', 'red');
+                //                         }
+                //                     }
+                //                 },
+                //                 error: function () {
+                //                     $success = $('.image-fulldisplay .info .info-success');
+                //                     $success.html('An error occurred, retry...');
+                //                     $success.css('color', 'red');
+                //                 }
+                //             });
+                //         })
+                //     })
+
+                // }
+            })
+
+        </script>
+
+        {%endfor%}
     </div>
-
-
+  
+    {% endif %}
    
-{% endfor %}
+
+    {%if user.is_authenticated %}
     <div class="addart">
         <i class="fa fa-plus fa-1" aria-hidden="true"></i>
     </div>
 
     <div class="addart-form">
         <div class="close">X</div>
-        <form class="addart-actualform" action="" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" name="title" id="title" class="form-controll" required/>
+        <form class="addart-actualform" name="formaddart" id="formaddart" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="formcontainer">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class="form-controll" required />
+                </div>
+                <div class="form-group">
+                    <label for="caption">Your name <span>(Artist name)</span></label>
+                    <input type="text" name="caption" id="caption" class="form-controll" value="{{ user.first_name }}"
+                     required />
+                </div>
             </div>
-            <div class="form-group">
-              <label for="caption">Your name  <span>(Artist name)</span></label>
-              <input type="text" name="caption" id="caption" class="form-controll" required/>
-            </div>
-            
             <div class="form-group file-area">
-                  <label for="images">Images  <span>(Your images should be at least 400x300 wide and less than 1MB)</span></label>
-              <input type="file" name="images" id="images" required="required" accept="image/*" />
-              <div class="file-dummy">
-                <div class="success">Great, your file is selected.</div>
-                <div class="default">Please upload an image</div>
-              </div>
+                <label for="images">Image <span>(Your image should be at least 400x300 wide and less than
+                        1MB)</span></label>
+                <input type="file" name="gallery_image" id="images" required="required" accept="image/*" />
+                <div class="file-dummy">
+                    <div class="success">Great, your file is selected.</div>
+                    <div class="default">Please upload an image</div>
+                </div>
+                <div id='fileerror' class="wrong"></div>
             </div>
-            
+            <div id='formerror' class="wrong"></div>
             <div class="form-group form-button">
-              <button type="submit">Upload your art</button>
-              <div class="hoverbar"></div>
+                <button type="submit">Upload your art</button>
+                <div class="hoverbar"></div>
             </div>
-            
-          </form>
-             
-          
-    </div>
-</body>
 
-</html>
+        </form>
+     
+        <script>
+            $(document).ready(function () {
+                //    console.log('aaa')
+                $('#formaddart').on('submit', function (event) {
+                    event.preventDefault();
+                    // console.log('bbb')
+                    var formdata = new FormData(this);
+                    // console.log('formdata =' + formdata);
+                    $.ajax({
+                        url: 'gallerydata/',
+                        type: 'POST',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            // console.log('data =' + data);
+                            if (data.valid) {
+                                location.reload();
+                            }
+                            else {
+                                $formwrong = $('#formaddart #formerror');
+                                if (data.hasOwnProperty('gallery_image')) {
+                                    $imagewrong = $('.file-area .wrong');
+                                    $imagewrong.css('display', 'block');
+                                    $imagewrong.html(data.gallery_image);
+                                }
+                                else if (data.hasOwnProperty('title')){
+                                    $formwrong.css('display', 'block');
+                                    $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
+                                }
+                               
+                            }
+
+                        },
+                        error: function () {
+                            $formwrong = $('#formaddart #formerror');
+                            $formwrong.css('display', 'block');
+                            $formwrong.html('Please try again!');
+                        }
+                    })
+                });
+            });
+        </script>
+    </div>
+    {% endif %}
+</main>
+
+<!-- Footer section -->
+{% endblock content %}
+  
+
+
+
