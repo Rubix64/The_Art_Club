@@ -10,7 +10,7 @@ class PrintForm(forms.ModelForm):
     def clean(self):
         cost = self.cleaned_data['cost']
         if (cost <= 0):
-            self.add_error('cost','Cost must be positive')
+            self.add_error('cost','Cost must be positive and less than 100000!')
         print_image = self.cleaned_data['print_image']
         if(not print_image):
             self.add_error('print_image','Upload an Image!')

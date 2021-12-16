@@ -6,6 +6,7 @@ import json
 
 from .models import *
 from prints.models import *
+from .forms import *
 
 # Create your views here.
 def no_of_contents(user):
@@ -33,6 +34,50 @@ def cart(request):
                 cost+=cart_item.qty*cart_item.print.cost
             context['totcost']=cost
     return render(request, 'cart.html',context)
+
+def order(request):
+    orderform=OrderForm()
+    if request.method == 'POST':
+        orderform = OrderForm(request.POST)
+        if orderform.is_valid():
+            orderobj=orderform.save(commit=False)
+            orderobj.user=request.user
+            orderobj.save() 
+            cart_items=Cart.objects.filter(user=request.user).order_by('-time_created')
+            for cart_item in cart_items:
+                OrderItem.objects.create(order=orderobj, print=cart_item.print, qty=cart_item.qty, status='P')
+            cart_items.delete()
+    data={
+        'submit':True,
+    }
+    if orderform.errors:
+        data['valid']=False
+        for field in orderform.errors:
+            # print(signupform.errors[field])
+            data[f'{field}']=orderform.errors[field]
+    else:
+        data['valid']=True
+    return data
+
+def checkout(request):
+    context={}
+    if request.method == 'POST':
+        context= order(request)
+    else:
+        context['submit']=False
+    context['no_of_contents']= no_of_contents(request.user)
+    if request.user.is_authenticated:
+        if Cart.objects.filter(user=request.user).count()==0:
+            context['nodata']=True
+        else:
+            context['nodata']=False
+            cart_items=Cart.objects.filter(user=request.user).order_by('-time_created')
+            context['cart_items']=cart_items
+            cost=0
+            for cart_item in cart_items:
+                cost+=cart_item.qty*cart_item.print.cost
+            context['totcost']=cost
+    return render(request, 'checkout.html',context)
 
 def cartadd(request):
     data={}
@@ -130,4 +175,5 @@ def cartdelete(request):
             data['success']=False
     else:
         data['success']=False
-    return JsonResponse(data)         
+    return JsonResponse(data)      
+  

@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ephesis&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=WindSong&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
+
+:root {
+  --background-color: #d1af78;
+  --background-shade: #412801;
+  --text-shade: rgb(121, 8, 8);
+  --text-tint: rgb(255, 233, 233);
+  --font1: "Playfair Display", serif;
+  --font21: "Ephesis", cursive;
+  --font22: "Dancing Script", cursive;
+  --font3: "WindSong", cursive;
+  --font4: "Work Sans", sans-serif;
+}
+
+* {
+  /* background-color: $bg; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main{
+  width: 100vw;
+  background-color: rgb(255, 255, 255);
+  padding: 30px 10px;
+  margin: auto;
+}
+
+.table-responsive{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+.custom-table{
+    min-width: 900px;
+}
+
+.checkout h1{
+    font-family: var(--font4);
+    margin:10vh 0;
+    text-transform: uppercase;
+    /* text-decoration: underline;
+    text-underline-offset: 10px; */
+}
+
+.table{
+    width: 100%;
+    color: #212529;
+    border-collapse: collapse;
+    font-size: 18px;
+    font-family: var(--font1);
+    cursor: default;
+    border-top:1px solid #212529;
+}
+
+.custom-table thead tr, .custom-table thead th {
+    background: rgb(204, 201, 201);
+    border-top: none;
+    border-bottom: none !important;
+}
+
+.table thead th {
+    border-top: none;
+    border-bottom: none !important;
+    vertical-align: bottom;
+}
+
+.table th{
+    text-align: inherit;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+}
+
+.custom-table tbody tr {
+    color: #777;
+    transition: .3s all ease;
+}
+
+.custom-table tbody tr:hover, .custom-table tbody tr:focus {
+    background: rgb(204, 201, 201);
+}
+
+.table tbody td {
+    color: #777;
+    font-weight: 400;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight: 300;
+    border: none;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+}
+
+.total{
+    font-weight: bold;
+    font-size: 18px;
+    font-family: var(--font1);
+    text-align: right;
+    padding:2vh 5vw 1vh 0;
+    background: rgb(204, 201, 201);
+    border-top:1px solid #212529;
+}
+
+.checkout{
+    margin:10vh 10vw;
+}
+
+.checkout-form {
+  /* display: flex; */
+  /* flex-direction:column; */
+  margin: auto;
+  background-color: white;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.form-group label {
+  margin: 5px;
+  font-size: 18px;
+  font-family: var(--font1);
+  color: var(--background-shade);
+  /* font-weight:600; */
+}
+
+.form-group span {
+  font-size: 16px;
+  font-weight: 100;
+  text-align: right;
+  font-style: italic;
+  /* margin-left:20px; */
+}
+
+.form-group input[type="text"] {
+  font-family: var(--font1);
+  /* font-weight: 600; */
+}
+
+.form-controll {
+  display: block;
+  padding: 8px 0 8px 8px;
+  width: 100%;
+  font-size: 16px;
+  background-color: rgba(209, 204, 204, 0.911);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* color: #fff; */
+  font-weight: 200;
+}
+.form-controll:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+/* .form-button {
+  font-size: 15px;
+  font-family: var(--font4);
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid var(--background-shade);
+  background-color: white; 
+  color: var(--background-shade);
+  margin-top: 20px;
+  padding: 20px;
+  width: max-content;
+  transition: all 0.5s ease-in-out;
+} */
+
+/* .form-button .hoverbar {
+  padding-left:0px; 
+  width: 100%;
+  transform: scale(0);
+  height: 1.5px;
+  margin-top: 3px;
+  transition: transform 0.3s ease-in-out;
+  background-color: var(--background-shade);
+}
+
+.form-button:hover .hoverbar {
+  transform: scale(1);
+} */
+
+.form-button button {
+font-size: 15px;
+  font-family: var(--font4);
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid var(--background-shade);
+  /* background-color: white; */
+  color: var(--background-shade);
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 20px;
+  width: max-content;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out;
+  /* padding: 8px 10px 0 10px; */
+  /* font-size: 13px; */
+  cursor: pointer;
+}
+
+.form-button button:hover {
+  background-color: var(--background-shade);
+  color: white;
+}
+
+.form-group {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.wrong{
+    background-color:rgb(230, 36, 94);
+    padding:5px;
+    /* margin-top:-5px; */
+    font-size:12px;
+    font-family: var(--font4);
+    font-weight: bold;
+    display: none;
+    overflow-wrap: wrap;  
+}
+
+.confirmation{
+  padding:10vh 5vw;
+  background-color:white;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.712),0 0 0 100vw rgba(0, 0, 0, 0.712),0 0 0 100vh rgba(0, 0, 0, 0.712);
+  display: none;
+}
+
+.confirmation h3{
+  font-family: var(--font4);
+  color:var(--background-shade);
+  /* margin:10vh 0; */
+  text-transform: uppercase;
+}
+
+.confirmation a button{
+  font-size: 15px;
+  font-family: var(--font4);
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid var(--background-shade);
+  /* background-color: white; */
+  color: var(--background-shade);
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 20px;
+  width: max-content;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out;
+  /* padding: 8px 10px 0 10px; */
+  /* font-size: 13px; */
+  cursor: pointer;
+}
+
+.confirmation a button:hover{
+  background-color: var(--background-shade);
+  color: white;
+}

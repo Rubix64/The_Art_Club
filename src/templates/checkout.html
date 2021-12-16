@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{%block links%}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock links%}
+
+{%block scripts%}
+<script defer type="text/javascript" src="{% static 'js/checkout.js'%}"></script>
+{% comment %} <script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script> {% endcomment %}
+{%endblock scripts%}
+
+{% block content %}
+
+<div class="background-image"></div>
+
+    <main>
+
+        <div class="checkout">
+        {% if not user.is_authenticated%}
+            <h1>Please login in to see the the summary.</h1>
+        {% elif nodata%}
+            {%if submit and valid%}
+            <div class="confirmation">
+                <h3>Your order has been placed successfully.</h3>
+                <a href="/"><button>>>> Back to home page...</button></a>
+            </div>
+            <script>
+            confirmation=document.querySelector('.confirmation');
+            confirmation.style.display='block';
+            </script>
+            {%else%}
+            <h1 >There isn't anything here. BYE!</h1>
+            {%endif%}
+        {% else %}
+            <h1>Summary:</h1>
+            <div class="table-responsive">
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title of the Product</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Cost(per unit)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for cart_item in cart_items %}
+                        <tr scope="row">
+                            <td>{{cart_item.print.title}}</td>
+                            <td>{{cart_item.qty}}</td>
+                            <td>Rs.{{cart_item.print.cost}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div class="total">TOTAL COST: Rs.{{totcost}}</div>
+            <hr>
+            <h1>Fill out the below  details:</h1>
+            <form class="checkout-form" name="checkoutform" action="." method="post" onsubmit="return checkoutValidate()">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label for="title">Name:</label>
+                    <input type="text" name="name" id="name" class="form-controll" value="{{user.first_name}}"  required />
+                </div>
+                <div class="form-group">
+                    <label for="caption">Phno: (+91)</label>
+                    <input type="number" name="phno" id="phno" class="form-controll" required />
+                    <div id="phno-wrong" class="wrong"></div>
+                </div>
+                <div class="form-group">
+                    <label for="title">Address:</label>
+                    <input type="text" name="address" id="address" class="form-controll" required />
+                </div>
+                <div class="form-group">
+                    <label for="title">City:</label>
+                    <input type="text" name="city" id="city" class="form-controll" required />
+                </div>
+                <div class="form-group">
+                    <label for="title">State:</label>
+                    <input type="text" name="state" id="state" class="form-controll" required />
+                </div>
+                <div class="form-group">
+                    <label for="title">Zipcode:</label>
+                    <input type="number" name="zipcode" id="zipcode" class="form-controll" required />
+                    <div id="zipcode-wrong" class="wrong"></div>
+                </div>
+                <div class="form-group form-button">
+                    <button type="submit" id="placeorder">Place your order</button>
+                    <a href="/cart/"><button type="button">Back to cart</button></a>
+                </div>
+                    <div id="other-wrong" class="wrong"></div>
+            </form>
+
+
+    {%if submit%}
+        {%if not valid%}
+            <script>
+                var zipcode_wrong=document.getElementById('zipcode-wrong');
+                var phno_wrong=document.getElementById('phno-wrong');
+                var other_wrong=document.getElementById('other-wrong');
+                if(data.phno){
+                    phno_wrong.style.display='block';
+                    phno_wrong.innerHTML="Phone number must be 10 digits long."    
+                }
+                else if(data.zipcode){
+                    zipcode_wrong.style.display='block';
+                    zipcode_wrong.innerHTML="Zipcode must be 6 digits long."
+                }
+                else{
+                    other_wrong.style.display='block';
+                    other_wrong.innerHTML="Please check your entries again."
+                }
+            </script>
+        {% endif %}
+    {%endif %}
+        </div>
+
+    {%endif %}
+    </main>
+
+<!-- Footer section -->
+{% endblock content %}

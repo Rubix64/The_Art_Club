@@ -7,7 +7,7 @@
 {%endblock%}
 
 {% block scripts%}
-
+<script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script>
 {%endblock%}
 
 {% block content %}
@@ -25,7 +25,7 @@
     {% else %}
     <div class="cart-total">
         <div class="cart-totcost">TOTAL: <span>Rs.{{totcost}}</span></div>
-        <button type="button">CHECKOUT >>> </button>
+        <a href="/cart/checkout"><button type="button">CHECKOUT >>> </button></a>
     </div>
     <hr class="cart-hr">
     <div class="cart-containers">

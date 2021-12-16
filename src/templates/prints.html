@@ -8,7 +8,8 @@
 {% endblock links%}
 
 {%block scripts%}
-<script defer type="text/javascript" src="{% static 'js/gallery.js'%}"></script>
+<script defer type="text/javascript" src="{% static 'js/prints.js'%}"></script>
+<script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script>
 {%endblock scripts%}
 
 {% block content %}
@@ -20,16 +21,24 @@
 
 <main>
     {% if nodata %}
-    <div class="nocontent">Sorry! There isn't any content here!</div>
-    {% else %}
 
+    <div class="nocontent">Sorry! There isn't any content here!</div>
     <div class="search">
-        <form action="#" method="get">
-            <input type="text" placeholder="Search for the Artist...">
+        <form action="." method="get">
+            <input type="text" name="artistsearch" placeholder="Search for the Artist...">
             <button><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     </div>
 
+    {% else %}
+
+    <div class="search">
+        <form action="." method="get">
+            <input type="text" name="artistsearch" placeholder="Search for the Artist...">
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+    
     <div class="image-display">
         <div class="close"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
         <div class="image-fulldisplay">
@@ -232,9 +241,9 @@
                                     $formwrong.css('display', 'block');
                                     $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
                                 }
-                                else if(data.hasOwnProperty('cost')){
+                                else{
                                     $formwrong.css('display', 'block');
-                                    $formwrong.html('Cost must be less than Rs.100000!');
+                                    $formwrong.html('Please try again!');
                                 }
                             }
 
