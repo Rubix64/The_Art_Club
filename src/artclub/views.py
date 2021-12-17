@@ -4,14 +4,9 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
+from .forms import UserLoginForm, UserRegistrationForm
 from cart.views import no_of_contents
 
-from .forms import *
-
-def index(request):
-    data ={}
-    data['no_of_contents']= no_of_contents(request.user)
-    return render(request,'index.html',data)
 
 def signup_view(request):
     signupform = UserRegistrationForm()
@@ -64,6 +59,10 @@ def logout_view(request):
     url= request.GET.get('url')
     return redirect(url)
 
+def index(request):
+    data ={}
+    data['no_of_contents']= no_of_contents(request.user)
+    return render(request,'index.html',data)
 
 def prints(request):
     return render(request,'prints.html',{})
