@@ -1,0 +1,305 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.addart{
+    position:fixed;
+    z-index:2;
+    bottom:5vh;
+    right:4vw;
+    font-size:50px;
+    font-weight:100!important;
+    border-radius:50px 0 50px 0;
+    box-shadow: 0 0 10px;
+    background-color:white;
+    padding:15px;
+    cursor:pointer;
+  }
+  .addart-form{
+    position:fixed;
+    display:flex; 
+    
+    width:100vw;
+    height:100vh;
+    top:0;
+    z-index:4;
+    background-color:white;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    transform: scaleY(0);
+    transition:transform .5s ease-in-out;
+    transform-origin:bottom ;
+    /*display: none; */
+    border: 2px solid black;
+   
+  } 
+  .addart-form-show{
+    transform: scaleY(1)!important;
+   
+    
+  }
+  
+  .addart-form .close{
+    position: fixed;
+    transform: translate(42vw, -42vh);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:25px;
+    cursor: pointer;
+
+  }
+
+.form_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid black;
+}
+.outer_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid black;
+}
+.file-dummy {
+    width: 100%;
+    padding: 30px 0;
+    font-family: var(--font4);
+    color: var(--background-shade);
+    background: rgba(202, 202, 202, 0.712);
+    border: 2px dashed rgba(255,255,255,0.2);
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+
+  }
+  .file-dummy .success {
+    display: none;
+
+  }
+
+
+  .file-dummy:hover .file-dummy {
+  background: rgba(255,255,255,0.1);
+  }
+
+  input[type=file]:focus + .file-dummy {
+  outline: 2px solid rgba(255,255,255,0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+  }
+
+  input[type=file]:valid + .file-dummy {
+  border-color: rgba(0,255,0,0.4);
+  background-color: rgba(0,255,0,0.3);
+  }
+  input[type=file]:valid + .file-dummy .success {
+    display: inline-block;
+  }
+  input[type=file]:valid + .file-dummy  .default {
+    display: none;
+  }
+  .file-area {
+    max-width: 100%;
+    position: relative;
+  }
+  .file-area  input[type=file] {
+      margin-left:10px;
+      position: absolute;
+      max-width: 100%;
+      height: auto;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+  }
+
+  .form-group {
+    margin:5px;
+    font-size: 18px;
+    font-family: var(--font1);
+    color:var(--background-shade);
+
+  }
+  .form-group span{
+    font-size: 16px;
+    font-weight:100;
+    text-align: right;
+    font-style: italic;
+     /* margin-left:20px; */
+  }
+  /*.form-group input[type=text]{
+    font-family: var(--font1);
+    /* font-weight: 600;
+  }
+  .form-controll {
+    /* display: block;
+    padding: 8px 0 8px 8px;
+    /* width:100%;
+    font-size: 15px;
+    background-color: rgba(209, 204, 204, 0.911);
+    border: 1px solid rgba(255, 255, 255, 0.288);
+    /* color: #fff;
+    font-weight: 200;
+  }
+  .form-controll:focus {
+    outline: 1px solid rgba(255,255,255,0.5);
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+  .form-button{
+    width:max-content;
+    align-self: left;
+  }
+  .form-button .hoverbar{
+    padding-left:0px;
+    width:100%;
+    transform: scale(0);
+    height:1.5px;
+    margin-top: 3px;;
+    transition: transform .3s ease-in-out;
+    background-color:  #053777;
+  }*/
+
+  /*from here i commented*/
+
+.form-group label{
+    margin:5px;
+    font-size: 18px;
+    font-family: var(--font1);
+    color:var(--background-shade);
+    /* font-weight:600; */
+  }
+
+  .form-group span{
+    font-size: 16px;
+    font-weight:100;
+    text-align: right;
+    font-style: italic;
+    /* margin-left:20px; */
+  }
+
+  .form-group input[type=text]{
+    font-family: var(--font1);
+    /* font-weight: 600;*/
+  }
+  .file-area {
+    max-width: 100%;
+    position: relative;
+  }
+  .file-area  input[type=file] {
+      margin-left:10px;
+      position: absolute;
+      max-width: 100%;
+      height: auto;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-dummy {
+      width: 100%;
+      padding: 30px 0;
+      font-family: var(--font4);
+      color: var(--background-shade);
+      background: rgba(202, 202, 202, 0.712);
+      border: 2px dashed rgba(255,255,255,0.2);
+      text-align: center;
+      transition: background 0.3s ease-in-out;
+
+    }
+    .file-dummy .success {
+        display: none;
+     }
+
+
+    .file-dummy:hover .file-dummy {
+      background: rgba(255,255,255,0.1);
+    }
+
+    input[type=file]:focus + .file-dummy {
+      outline: 2px solid rgba(255,255,255,0.5);
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    input[type=file]:valid + .file-dummy {
+      border-color: rgba(0,255,0,0.4);
+      background-color: rgba(0,255,0,0.3);
+    }
+    input[type=file]:valid + .file-dummy .success {
+        display: inline-block;
+    }
+    input[type=file]:valid + .file-dummy  .default {
+        display: none;
+  }
+
+
+  .form-controll {
+    display: block;
+    padding: 8px 0 8px 8px;
+    width:100%;
+    font-size: 16px;
+    background-color: rgba(209, 204, 204, 0.911);
+    border: 1px solid rgba(255,255,255,0.3);
+    /* color: #fff; */
+    font-weight: 200;
+  }
+  .form-controll:focus {
+      outline: 1px solid rgba(255,255,255,0.5);
+      outline: -webkit-focus-ring-color auto 5px;
+  }
+  /* #conid{
+    width:500px;
+    height:80px;
+    display: block;
+    padding: 8px 0 8px 8px;
+    font-size: 16px;
+    background-color: rgba(209, 204, 204, 0.911);
+    border: 1px solid rgba(255,255,255,0.3);
+    /* color: #fff;
+    font-weight: 200;
+  } */
+  .form-button{
+    width:max-content;
+    align-self: left;
+  }
+
+  .form-button .hoverbar{
+     padding-left:0px;
+    width:100%;
+    transform: scale(0);
+    height:1.5px;
+    margin-top: 3px;;
+    transition: transform .3s ease-in-out;
+    background-color:  #053777;
+  }
+
+  .form-button:hover .hoverbar{
+    transform: scale(1);
+  }
+
+  button {
+    padding: 8px 10px 0 10px;
+    background: rgba(255,255,255,0.8);
+    color: #053777;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 13px;
+    border: 0;
+    text-shadow: 0 1px 2px #fff;
+    cursor: pointer;
+  }
+
+
+  .form-group {
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+

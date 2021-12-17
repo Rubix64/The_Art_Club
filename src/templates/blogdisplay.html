@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "bloghead.html" %}
+    <title>Blog</title>
+</head>
+<body>
+    {% csrf_token %}
+    <div class="blog_main_container">
+        {% load static %}
+        {% for post in object_list %}
+        <div class="blog_head">
+            <h1>{{post.title}}</h1>
+        </div>
+        <div class="blog_img">
+          <img src="{{post.image.url}}"> 
+        
+          
+        </div>
+        <div class="blog_description">
+          <p id="description">{{post.description}}</p>
+          <a href="{% url 'PostDetails' post.pk %}" class="read_data" id="read">Read more</a>
+          <div class="author">
+          <p id="aname"><b>{{post.author}}</b></p>
+          <p id="ddate">{{post.published_date}}</p>
+          <!-- <p id="content">{{post.content}}</p> -->
+          </div>
+          
+        </div>
+        {% endfor %}
+    </div>
+    <div class="addart">
+     <i class="fa fa-plus fa-1" aria-hidden="true"></i>
+    </div>
+
+    <div class="addart-form">
+     
+       
+        <div class="close">X</div>
+        <div class="form_container">
+        <form class="addart-actualform" action="/create/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Post a blog</h1>
+            <div class="first_block">
+            <div class="form-group">
+                <label for="caption">Your name </label>
+                <input type="text" name="author" id="caption" class="form-controll" required/>
+              </div>
+    
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" class="form-controll" required/>
+            </div>
+          </div>
+            <div class="form-group">
+                <label for="caption">Description </label>
+                <input type="text" name="description" id="caption" class="form-controll" required/>
+              </div>
+    
+              <div class="form-group file-area">
+                <label for="images">Images  <span>(Your images should be at least 400x300 wide)</span></label>
+            <input type="file" name="image" id="images" required="required"/>
+            <div class="file-dummy">
+              <div class="success">Great, your file is selected.</div>
+              <div class="default">Please upload an image</div>
+            </div> 
+          </div>
+    
+             <div class="form-group">
+              <label for="caption">Content </label>
+              <br>
+              <textarea name="content" cols="50" rows="10" id="content" required></textarea>
+            </div>
+            
+            <div class="form-group form-button">
+              <button type="submit">Upload</button>
+              <div class="hoverbar"></div>
+            </div>
+            
+          </form>
+            </div> 
+    </div> 
+
+ 
+
+<!-- 
+
+    <div class="addart-form">
+     
+       
+        <div class="close">X</div>
+       
+        <div class="form_container">
+        <form  action="/create/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- <br><br><br> -->
+            <!-- <div class="upload_post_container"> 
+            <h1>Post a blog</h1>
+            
+            
+            <div class="first_block>
+
+              <label for="name">Name:</label>
+              <input type="text" name="author" id="caption" class="form-controll" required/>
+            
+    
+              <label for="title" id="titlel">Title:</label>
+              <input type="text" name="title" id="title" class="form-controll" required/>
+           
+            
+        
+            
+                <label for="caption">Description:</label>
+                <input type="text" name="description" id="caption" class="form-controll" required/>
+              
+             
+              <div class="form-group file-area">
+                <label for="images" id="imagel">Images:<span>(Images should 400x300 wide)</span></label>
+            <input type="file" name="image"  id="images" required="required"/>
+            <div class="file-dummy">
+              <div class="success">Great, your file is selected.</div>
+              <div class="default">Please upload an image</div>
+            </div> 
+          </div>
+     </div>
+     
+            <div class="content_block">
+             
+              <label for="caption">Content </label>
+              <br>
+              <textarea name="content" cols="50" rows="10" id="content" required></textarea>
+            
+          </div>
+
+        </div>
+            <div class="form-group form-button">
+              <button type="submit">Upload</button>
+              <div class="hoverbar"></div>
+            </div>
+         
+          
+          </form>
+         
+      </div> -->
+</body>
+</html>

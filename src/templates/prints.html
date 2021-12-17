@@ -8,8 +8,10 @@
 {% endblock links%}
 
 {%block scripts%}
+
 <script defer type="text/javascript" src="{% static 'js/prints.js'%}"></script>
 <script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script>
+
 {%endblock scripts%}
 
 {% block content %}
@@ -154,6 +156,15 @@
         </script>
 
         {%endfor%}
+        <!-- <script>
+            let imageDisplay=document.querySelectorAll('.image-display');
+            let imgDisplayClose=document.querySelectorAll('.image-display .close');
+            let success = document.querySelector('.image-display .image-fulldisplay img');
+            imgDisplayClose[0].addEventListener('click', ()=>{
+            success.innerHTML="";
+            imageDisplay[0].classList.remove('image-display-show');
+            })
+        </script> -->
     </div>
 
     {% endif %}
@@ -244,6 +255,7 @@
                                 else{
                                     $formwrong.css('display', 'block');
                                     $formwrong.html('Please try again!');
+
                                 }
                             }
 

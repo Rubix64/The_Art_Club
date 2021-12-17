@@ -2,13 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Sum
-import json
 
 from .models import *
 from prints.models import *
 from .forms import *
 
 # Create your views here.
+
 def no_of_contents(user):
     if user.is_authenticated:
         totalqty=Cart.objects.filter(user=user).aggregate(Sum('qty'))

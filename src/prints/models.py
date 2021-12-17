@@ -13,4 +13,3 @@ class Print(models.Model):
 
     def __str__(self):
         return self.title+" ( By:"+self.artist.first_name+")"+" -Rs."+str(self.cost)
-    

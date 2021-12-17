@@ -1,80 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/gallery.css">
-    <script defer type="text/javascript" src="js/gallery.js"></script>
-    <title>Document</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% load static %}
+
+{%block links%}
+
+<!-- <link rel="stylesheet" href="{% static 'css/prints.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+<link rel="stylesheet" href="{% static 'css/gallery2.css' %}">
+
+{% endblock links%}
+
+{%block scripts%}
+<script defer type="text/javascript" src="{% static 'js/gallery.js'%}"></script>
+<script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script>
+{%endblock scripts%}
+
+{% block content %}
+<div class="background-image"></div>
+
+{% include 'title_nav2.html' %}
+<main>
+    {% if nodata %}
+    <div class="nocontent">Sorry! There isn't any content here!</div>
+    {% else %}
+
     <div class="search">
         <form action="#" method="get">
             <input type="text" placeholder="Search for the Artist...">
             <button><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     </div>
+
+    <div class="image-display">
+        <div class="close"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+        <div class="image-fulldisplay">
+            <img src="" alt="">
+        </div>
+    </div>
+
     <div class="image-containers">
-        <div class="container">
+        {% for gallery in galleries %}
+        <div class="container" id="{{gallery.id}}" >
+            <script>
+                var container = document.getElementById('{{gallery.id}}')
+                container.style.backgroundImage = `url('{{gallery.gallery_image.url}}')`;   
+            </script>
             <div class="overlay">
-                <div class="art heart"><i class="fa fa-heart-o nofill" aria-hidden="true"></i>
-                    <i class="fa fa-heart fill" aria-hidden="true"></i>
+                <div class="art heart">
+                    <!-- <i class="fa fa-heart-o nofill" aria-hidden="true"></i> -->
+                    <!-- <i class="fa fa-heart fill" aria-hidden="true"></i> -->
                 </div>
                 <div class="art title">
-                    <p>Flower Embroidery Hoop Art</p>
+                    <p>{{gallery.title}}</p>
                     <hr>
                 </div>
                 <div class="art artby">
                     <div class="first">Art By:</div>
-                    <div class="second">Name</div>
+                    <div class="second">{{gallery.artist.first_name}}</div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="image-display">
-        <div class="close"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-        <div class="image-fulldisplay"><img src="images/art4.jpg" alt="art1">
-        </div>
-    </div>
+        
+        <script>
+            var container = document.getElementById('{{gallery.id}}');
+            container.addEventListener('click', () => {
+                var imagedisplay = document.querySelectorAll(".image-display");
+                imagedisplay[0].classList.add('image-display-show');
 
+                var image = document.querySelector(".image-fulldisplay img");
+                image.setAttribute('src', '{{gallery.gallery_image.url}}');
+                image.setAttribute('alt', '{{gallery.title}}');
+
+            })
+
+        </script>
+
+        {%endfor%}
+    </div>
+  
+    {% endif %}
+   
+
+    {%if user.is_authenticated %}
     <div class="addart">
         <i class="fa fa-plus fa-1" aria-hidden="true"></i>
     </div>
 
     <div class="addart-form">
         <div class="close">X</div>
-        <form class="addart-actualform"action method="post">
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" name="title" id="title" class="form-controll" required/>
-            </div>
-            <div class="form-group">
-              <label for="caption">Your name  <span>(Artist name)</span></label>
-              <input type="text" name="caption" id="caption" class="form-controll" required/>
-            </div>
-            
-            <div class="form-group file-area">
-                  <label for="images">Images  <span>(Your images should be at least 400x300 wide and less than 1MB)</span></label>
-              <input type="file" name="images" id="images" required="required" accept="image/*" />
-              <div class="file-dummy">
-                <div class="success">Great, your file is selected.</div>
-                <div class="default">Please upload an image</div>
-              </div>
-            </div>
-            
-            <div class="form-group form-button">
-              <button type="submit">Upload your art</button>
-              <div class="hoverbar"></div>
-            </div>
-            
-          </form>
-             
-          
-    </div>
-</body>
 
-</html>
+        <form class="addart-actualform" name="formaddart" id="formaddart" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="formcontainer">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class="form-controll" required />
+                </div>
+                <div class="form-group">
+                    <label for="caption">Your name <span>(Artist name)</span></label>
+                    <input type="text" name="caption" id="caption" class="form-controll" value="{{ user.first_name }}"
+                     required />
+                </div>
+            </div>
+            <div class="form-group file-area">
+                <label for="images">Image <span>(Your image should be at least 400x300 wide and less than
+                        1MB)</span></label>
+                <input type="file" name="gallery_image" id="images" required="required" accept="image/*" />
+                <div class="file-dummy">
+                    <div class="success">Great, your file is selected.</div>
+                    <div class="default">Please upload an image</div>
+                </div>
+                <div id='fileerror' class="wrong"></div>
+            </div>
+            <div id='formerror' class="wrong"></div>
+            <div class="form-group form-button">
+                <button type="submit">Upload your art</button>
+                <div class="hoverbar"></div>
+            </div>
+
+        </form>
+     
+        <script>
+            $(document).ready(function () {
+                //    console.log('aaa')
+                $('#formaddart').on('submit', function (event) {
+                    event.preventDefault();
+                    // console.log('bbb')
+                    var formdata = new FormData(this);
+                    // console.log('formdata =' + formdata);
+                    $.ajax({
+                        url: 'gallerydata/',
+                        type: 'POST',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            // console.log('data =' + data);
+                            if (data.valid) {
+                                location.reload();
+                            }
+                            else {
+                                $formwrong = $('#formaddart #formerror');
+                                if (data.hasOwnProperty('gallery_image')) {
+                                    $imagewrong = $('.file-area .wrong');
+                                    $imagewrong.css('display', 'block');
+                                    $imagewrong.html(data.gallery_image);
+                                }
+                                else if (data.hasOwnProperty('title')){
+                                    $formwrong.css('display', 'block');
+                                    $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
+                                }
+                               
+                            }
+
+                        },
+                        error: function () {
+                            $formwrong = $('#formaddart #formerror');
+                            $formwrong.css('display', 'block');
+                            $formwrong.html('Please try again!');
+                        }
+                    })
+                });
+            });
+        </script>
+    </div>
+    {% endif %}
+</main>
+
+<!-- Footer section -->
+{% endblock content %}
+  
+
+
+

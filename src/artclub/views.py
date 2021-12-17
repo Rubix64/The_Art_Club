@@ -64,8 +64,14 @@ def logout_view(request):
     url= request.GET.get('url')
     return redirect(url)
 
+
 def prints(request):
     return render(request,'prints.html',{})
 
 def cart(request):
     return render(request,'cart.html',{})
+
+
+
+# def render_home_page(request):
+#     return render(request,'uploadsuccess.html')

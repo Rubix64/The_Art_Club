@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "bloghead.html" %}
+</head>
+<body>
+<div class="addart-form">
+    <div class="close">X</div>
+    <form class="addart-actualform" action="/create/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="caption">Your name </label>
+            <input type="text" name="caption" id="caption" class="form-controll" required/>
+          </div>
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" class="form-controll" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="caption">Description </label>
+            <input type="text" name="caption" id="caption" class="form-controll" required/>
+          </div>
+
+          <div class="form-group file-area">
+            <label for="images">Images  <span>(Your images should be at least 400x300 wide)</span></label>
+        <input type="file" name="image" id="images" required="required"/>
+        <div class="file-dummy">
+          <div class="success">Great, your file is selected.</div>
+          <div class="default">Please upload an image</div>
+        </div> 
+      </div>
+
+         <div class="form-group">
+          <label for="caption">Content </label>
+          <input type="text" name="caption" id="caption" class="form-controll" required/>
+        </div>
+        
+        
+        <div class="form-group form-button">
+          <button type="submit">Upload</button>
+          <div class="hoverbar"></div>
+        </div>
+        
+      </form>
+         
+</div>
+</body>
+</html>

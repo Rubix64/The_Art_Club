@@ -63,7 +63,10 @@ main {
   width: 220px;
   height: 60px;
   transition: all 0.5s ease-in-out;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+>>>>>>> f416137683e3a6a3c2ff9410a875b98770365fcf
 }
 
 .cart-total button:hover {

@@ -46,4 +46,3 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.order.name+"(Order id:"+str(self.order.id)+":- "+str(self.print.id)+" qty:"+str(self.qty)+")"
     
-    
