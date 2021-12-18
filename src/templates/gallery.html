@@ -22,9 +22,15 @@
 {% include 'title_nav2.html' %}
 <main>
     {% if nodata %}
+    
     <div class="nocontent">Sorry! There isn't any content here!</div>
+    <div class="search">
+        <form action="." method="get">
+            <input type="text" name="artistsearch" placeholder="Search for the Artist...">
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
     {% else %}
-
     <div class="search">
         <form action="." method="get">
             <input type="text" name="artistsearch" placeholder="Search for the Artist...">
@@ -151,7 +157,11 @@
                                     $formwrong.css('display', 'block');
                                     $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
                                 }
-                               
+                                 else{
+                                    $formwrong.css('display', 'block');
+                                    $formwrong.html('Please try again!');
+
+                                }
                             }
 
                         },

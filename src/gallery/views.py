@@ -3,9 +3,11 @@ from django.http import JsonResponse
 from .models import *
 from .forms import *
 from django.views.generic import ListView
+
 from cart.views import no_of_contents
-def gallery(request):
-    return render(request,'gallery.html')
+
+# def gallery(request):
+#     return render(request,'gallery.html')
 
 def galleries(request):
     context={}
@@ -13,8 +15,13 @@ def galleries(request):
     if(Gallery.objects.count() == 0):
         context['nodata']=True 
     else:
-        if(Gallery.objects.count() == 0):
-            context['nodata']=True 
+        if request.method == 'GET' and request.GET.get('artistsearch'):
+            artistsearch = request.GET.get('artistsearch')
+            context['galleries']=Gallery.objects.filter(artist__first_name__icontains=artistsearch).order_by('-time_created') 
+            if(context['galleries'].count() == 0):
+                context['nodata']=True
+            else:
+                context['nodata']=False
         else:
             context['nodata']=False
             context['galleries']=Gallery.objects.order_by('-time_created') 
