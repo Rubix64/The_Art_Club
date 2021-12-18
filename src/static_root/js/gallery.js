@@ -9,6 +9,7 @@ addartclose.addEventListener('click', ()=>{
     addartform.classList.remove("addart-form-show");
 })
 
+
 let imageDisplay=document.querySelectorAll('.image-display');
 if(imageDisplay){
     let imgDisplayClose=document.querySelectorAll('.image-display .close');

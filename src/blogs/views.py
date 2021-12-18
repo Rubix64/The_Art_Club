@@ -1,24 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import redirect,render
 from django.template import RequestContext
 from django.views.generic import ListView,DetailView,UpdateView
 from .models import Post
-
+from .forms import BlogForm
+from django.http import JsonResponse
 # def blog(request):
 #     return render(request,'blogpage.html')
 
 # def upload_form(request):
 #         return render(request, 'blogUploadForm.html')
-
-def create_post(request):
-    if request.method == 'POST':
-        author=request.POST['author']
-        title=request.POST['title']
-        image=request.FILES['image']
-        description=request.POST['description']
-        content=request.POST['content']
-        posts=Post(author=author, title=title, image=image, description=description, content=content)
-        posts.save()
-        return render(request,'uploadsuccess.html')
+from cart.views import no_of_contents
+# def create(request):
+#     if request.method == 'POST':
+#         author=request.POST['author']
+#         title=request.POST['title']
+#         image=request.FILES['image']
+#         description=request.POST['description']
+#         content=request.POST['content']
+#         posts=Post(author=author, title=title, image=image, description=description, content=content)
+#         posts.save()
+#         return redirect('/blogs/')
 
 class Blog(ListView):
     model=Post
@@ -28,7 +29,21 @@ class PostDetails(DetailView):
     model=Post
     template_name='blogdetails.html'
 
-
-
-
-    
+def create(request):
+    blogform=BlogForm()
+    if request.method == 'POST':
+        blogform = BlogForm(request.POST, request.FILES)
+        if blogform.is_valid():
+            blogobj=blogform.save(commit=False)
+            blogobj.artist=request.user
+            blogobj.save()
+    data={}
+    if blogform.errors:
+        data['valid']=False
+        for field in blogform.errors:
+            # print(signupform.errors[field])
+            data[f'{field}']=blogform.errors[field]
+    else:
+        data['valid']=True
+    # print("data = " , data)
+    return JsonResponse(data)

@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
-from blogs.views import create_post
+
 # from .views import render_home_page
 
 from .views import *
@@ -34,7 +34,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('gallery/', include('gallery.urls')),
     # path('',render_home_page),
-    path('create/',create_post),
+    # path('create/',create_post),
 ]
 
 # if settings.DEBUG:

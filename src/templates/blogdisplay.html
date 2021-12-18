@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include "bloghead.html" %}
-    <title>Blog</title>
-</head>
-<body>
-    {% csrf_token %}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{%block links%}
+
+<!-- <link rel="stylesheet" href="{% static 'css/prints.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/blogstyle.css' %}">
+<link rel="stylesheet" href="{% static 'css/prints.css' %}">
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+
+
+{% endblock links%}
+
+{%block scripts%}
+<script defer type="text/javascript" src="{% static 'js/blogs.js'%}"></script>
+<script defer type="text/javascript" src="{% static 'js/mobile.js'%}"></script>
+
+{%endblock scripts%}
+
+{% block content %}
+<div class="background-image"></div>
+
+{% include 'title_nav2.html' %}
+<main>
+    {% if nodata %}
+    <div class="nocontent">Sorry! There isn't any content here!</div>
+    {% else %}
+    {
+    <!-- {% csrf_token %} -->
     <div class="blog_main_container">
         {% load static %}
         {% for post in object_list %}
@@ -29,57 +51,104 @@
         </div>
         {% endfor %}
     </div>
-    <div class="addart">
-     <i class="fa fa-plus fa-1" aria-hidden="true"></i>
-    </div>
+    {% endif %}
 
-    <div class="addart-form">
-     
-       
-        <div class="close">X</div>
-        <div class="form_container">
-        <form class="addart-actualform" action="/create/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h1>Post a blog</h1>
-            <div class="first_block">
-            <div class="form-group">
-                <label for="caption">Your name </label>
-                <input type="text" name="author" id="caption" class="form-controll" required/>
+    {%if user.is_authenticated %}
+    <div class="addart">
+      <i class="fa fa-plus fa-1" aria-hidden="true"></i>
+  </div>
+
+  <div class="addart-form">
+      <div class="close">X</div>
+      <form class="addart-actualform" name="formaddart" action="create/" id="formaddart" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+          <div class="formcontainer">
+              <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" name="title" id="title" class="form-controll" required />
               </div>
-    
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" name="title" id="title" class="form-controll" required/>
-            </div>
-          </div>
-            <div class="form-group">
-                <label for="caption">Description </label>
-                <input type="text" name="description" id="caption" class="form-controll" required/>
+              <div class="form-group">
+                  <label for="author">Your name <span>(Author name)</span></label>
+                  <input type="text" name="author" id="author" class="form-controll" value="{{ user.first_name }}"
+                disabled required />
               </div>
-    
-              <div class="form-group file-area">
-                <label for="images">Images  <span>(Your images should be at least 400x300 wide)</span></label>
-            <input type="file" name="image" id="images" required="required"/>
-            <div class="file-dummy">
-              <div class="success">Great, your file is selected.</div>
-              <div class="default">Please upload an image</div>
-            </div> 
+             
+              <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea name="description" id="description" class="form-controll" rows=5 required></textarea>
+              </div>
           </div>
-    
-             <div class="form-group">
-              <label for="caption">Content </label>
-              <br>
-              <textarea name="content" cols="50" rows="10" id="content" required></textarea>
-            </div>
-            
-            <div class="form-group form-button">
+          <div class="form-group file-area">
+              <label for="images">Image <span>(Your image should be at least 400x300 wide and less than
+                      1MB)</span></label>
+              <input type="file" name="image" id="images" required="required" accept="image/*" />
+              <div class="file-dummy">
+                  <div class="success">Great, your file is selected.</div>
+                  <div class="default">Please upload an image</div>
+              </div>
+              <div id='fileerror' class="wrong"></div>
+          </div>
+          <div class="formcontainer">
+              <div class="form-group">
+                  <label for="content">Content</label>
+                  <textarea name="content" id="content" class="form-controll" rows=12 required></textarea>
+              </div>
+          </div>
+          <div id='formerror' class="wrong"></div>
+          <div class="form-group form-button">
               <button type="submit">Upload</button>
               <div class="hoverbar"></div>
-            </div>
-            
-          </form>
-            </div> 
-    </div> 
+          </div>
+
+      </form>
+
+       <script>
+        $(document).ready(function () {
+            //    console.log('aaa')
+            $('#formaddart').on('submit', function (event) {
+                event.preventDefault();
+                // console.log('bbb')
+                var formdata = new FormData(this);
+                // console.log('formdata =' + formdata);
+                $.ajax({
+                    url: 'create/',
+                    type: 'POST',
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        // console.log('data =' + data);
+                        if (data.valid) {
+                            location.reload();
+                        }
+                        else {
+                            $formwrong = $('#formaddart #formerror');
+                            if (data.hasOwnProperty('image')) {
+                                $imagewrong = $('.file-area .wrong');
+                                $imagewrong.css('display', 'block');
+                                $imagewrong.html(data.image);
+                            }
+                            else if (data.hasOwnProperty('title')){
+                                $formwrong.css('display', 'block');
+                                $formwrong.html('Please recheck ur title(it should be less than 20 characters!')
+                            }
+                            else{
+                                $formwrong.css('display', 'block');
+                                $formwrong.html('Please try ooo  again!');
+
+                            }
+                        }
+
+                    },
+                    error: function () {
+                        $formwrong = $('#formaddart #formerror');
+                        $formwrong.css('display', 'block');
+                        $formwrong.html('Please try again!');
+                    }
+                })
+            });
+        });
+    </script> 
 
  
 
@@ -93,8 +162,8 @@
         <div class="form_container">
         <form  action="/create/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <!-- <br><br><br> -->
-            <!-- <div class="upload_post_container"> 
+          
+           <div class="upload_post_container"> 
             <h1>Post a blog</h1>
             
             
@@ -142,5 +211,9 @@
           </form>
          
       </div> -->
-</body>
-</html>
+      {% endif %}
+    </div> 
+</main>
+
+
+{% endblock content %}

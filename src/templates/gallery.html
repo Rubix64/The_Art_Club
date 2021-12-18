@@ -26,8 +26,8 @@
     {% else %}
 
     <div class="search">
-        <form action="#" method="get">
-            <input type="text" placeholder="Search for the Artist...">
+        <form action="." method="get">
+            <input type="text" name="artistsearch" placeholder="Search for the Artist...">
             <button><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     </div>
@@ -100,7 +100,7 @@
                 <div class="form-group">
                     <label for="caption">Your name <span>(Artist name)</span></label>
                     <input type="text" name="caption" id="caption" class="form-controll" value="{{ user.first_name }}"
-                     required />
+                     disabled required />
                 </div>
             </div>
             <div class="form-group file-area">
