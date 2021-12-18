@@ -24,13 +24,26 @@
 {% include 'title_nav2.html' %}
 <main>
     {% if nodata %}
+    
     <div class="nocontent">Sorry! There isn't any content here!</div>
+    <div class="search">
+        <form action="." method="get">
+            <input type="text" name="authorsearch" placeholder="Search for the Artist...">
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
     {% else %}
+    <div class="search">
+        <form action="." method="get">
+            <input type="text" name="authorsearch" placeholder="Search for the Artist...">
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
     
     <!-- {% csrf_token %} -->
     <div class="blog_main_container">
         {% load static %}
-        {% for post in object_list %}
+        {% for post in posts %}
         <div class="blog_head">
             <h1>{{post.title}}</h1>
         </div>

@@ -21,10 +21,27 @@ from cart.views import no_of_contents
 #         posts.save()
 #         return redirect('/blogs/')
 
-class Blog(ListView):
-    model=Post
-    template_name="blogdisplay.html"
+# class Blog(ListView):
+#     model=Post
+#     template_name="blogdisplay.html"
 
+def posts(request):
+    context={}
+    context['no_of_contents']= no_of_contents(request.user) 
+    if(Post.objects.count() == 0):
+        context['nodata']=True 
+    else:
+        if request.method == 'GET' and request.GET.get('authorsearch'):
+            authorsearch = request.GET.get('authorsearch')
+            context['posts']=Post.objects.filter(author__first_name__icontains=authorsearch).order_by('-date') 
+            if(context['posts'].count() == 0):
+                context['nodata']=True
+            else:
+                context['nodata']=False
+        else:
+            context['nodata']=False
+            context['posts']=Post.objects.order_by('-date') 
+    return render(request,'blogdisplay.html',context)
 class PostDetails(DetailView):
     model=Post
     template_name='blogdetails.html'
