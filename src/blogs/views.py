@@ -10,16 +10,16 @@ from django.http import JsonResponse
 # def upload_form(request):
 #         return render(request, 'blogUploadForm.html')
 from cart.views import no_of_contents
-# def create(request):
-#     if request.method == 'POST':
-#         author=request.POST['author']
-#         title=request.POST['title']
-#         image=request.FILES['image']
-#         description=request.POST['description']
-#         content=request.POST['content']
-#         posts=Post(author=author, title=title, image=image, description=description, content=content)
-#         posts.save()
-#         return redirect('/blogs/')
+def create(request):
+    if request.method == 'POST':
+        author=request.POST.get('author',request.user)
+        title=request.POST['title']
+        image=request.FILES['image']
+        description=request.POST['description']
+        content=request.POST['content']
+        posts=Post(author=author, title=title, image=image, description=description, content=content)
+        posts.save()
+        return redirect('/blogs/')
 
 # class Blog(ListView):
 #     model=Post
@@ -46,21 +46,21 @@ class PostDetails(DetailView):
     model=Post
     template_name='blogdetails.html'
 
-def create(request):
-    blogform=BlogForm()
-    if request.method == 'POST':
-        blogform = BlogForm(request.POST, request.FILES)
-        if blogform.is_valid():
-            blogobj=blogform.save(commit=False)
-            blogobj.artist=request.user
-            blogobj.save()
-    data={}
-    if blogform.errors:
-        data['valid']=False
-        for field in blogform.errors:
-            # print(signupform.errors[field])
-            data[f'{field}']=blogform.errors[field]
-    else:
-        data['valid']=True
-    # print("data = " , data)
-    return JsonResponse(data)
+# def create(request):
+#     blogform=BlogForm()
+#     if request.method == 'POST':
+#         blogform = BlogForm(request.POST, request.FILES)
+#         if blogform.is_valid():
+#             blogobj=blogform.save(commit=False)
+#             blogobj.artist=request.user
+#             blogobj.save()
+#     data={}
+#     if blogform.errors:
+#         data['valid']=False
+#         for field in blogform.errors:
+#             # print(signupform.errors[field])
+#             data[f'{field}']=blogform.errors[field]
+#     else:
+#         data['valid']=True
+#     # print("data = " , data)
+#     return JsonResponse(data)
