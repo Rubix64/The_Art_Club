@@ -2,12 +2,16 @@
 let addart=document.querySelector('.addart');
 let addartform=document.querySelector('.addart-form');
 let addartclose=document.querySelector('.addart-form .close');
+if(addart){
 addart.addEventListener('click', ()=>{
     addartform.classList.add("addart-form-show");
 })
+}
+if(addartclose){
 addartclose.addEventListener('click', ()=>{
     addartform.classList.remove("addart-form-show");
 })
+}
 
 
 let imageDisplay=document.querySelectorAll('.image-display');
