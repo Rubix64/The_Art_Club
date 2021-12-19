@@ -3,4 +3,4 @@
 .vscode
 .idea
 *.pyc 
-
+.sqlite3
