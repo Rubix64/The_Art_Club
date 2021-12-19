@@ -32,7 +32,11 @@ h2{
     line-height:35px;
     letter-spacing:1px;
     font-size: 17px;
+    
    
+}
+.blog_main_container{
+    background-color: white;
 }
 .date_name{
  margin-left: 23vw;
@@ -46,3 +50,19 @@ margin-top:2vh;
 font-size:1.5vw;
 margin-bottom: 5vh;
  }
+
+.back-button{
+  text-align: center;
+}
+#back{
+    background-color:white;
+    color: rgb(121, 8, 8);
+    padding:10px;
+    width:90px;
+    margin-bottom: 60px;
+    border:1px solid rgb(121, 8, 8)
+}
+#back:hover{
+    background-color:rgb(121, 8, 8);
+    color:white;
+}

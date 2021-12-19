@@ -1,29 +1,39 @@
-<!-- <h1>here is the blog</h1> -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="stylesheet" href="{% static 'css/blogdetails.css' %} ">
-   <title>Blog</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{%block links%}
+
+<link rel="stylesheet" href="{% static 'css/blogdetails.css' %}">
+
+{% endblock links%}
+
+{% block content %}
+ <div class="background-image"></div> 
+
+{% include 'navforposts.html' %}
+<main>
+    
     <div class="blog_main_container">
-       
-   
+        <div class="background-image"></div> 
+       <br><br>
         <h2>{{post.title}}</h2>
          <div class="image_block">
              <img src="{{post.image.url}}">
              <div class="date_name">
-             <p id="name">{{post.author}}</p>   
+             <p id="name">{{post.author.first_name}}</p>   
             
              <p id="date">{{post.published_date}}</p>
             </div>
              <p id="content">{{post.content| linebreaksbr }}</p>
        
          </div>
+         <div class="back-button">
+         <!-- <button type="button" id="back">--Back--</button> -->
+         <a href="{% url 'posts' %}" ><button id="back">Back</button></a>
+        </div>
     </div>
 </body>
+</main>
+
+{% endblock content %}

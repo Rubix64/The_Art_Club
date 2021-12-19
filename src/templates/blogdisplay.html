@@ -56,7 +56,7 @@
           <p id="description">{{post.description}}</p>
           <a href="{% url 'PostDetails' post.pk %}" class="read_data" id="read">Read more</a>
           <div class="author">
-          <p id="aname"><b>{{post.author}}</b></p>
+          <p id="aname"><b>{{post.author.first_name}}</b></p>
           <p id="ddate">{{post.published_date}}</p>
           <!-- <p id="content">{{post.content}}</p> -->
           </div>
@@ -73,7 +73,7 @@
 
   <div class="addart-form">
       <div class="close">X</div>
-      <form class="addart-actualform" name="formaddart" action="create/" id="formaddart" method="post" enctype="multipart/form-data">
+      <form class="addart-actualform"  action="create/" name="formaddart"  id="formaddart" method="post" enctype="multipart/form-data">
           {%csrf_token%}
           <div class="formcontainer">
               <div class="form-group">
@@ -115,7 +115,7 @@
 
       </form>
 
-       <!-- <script>
+       <script>
         $(document).ready(function () {
             //    console.log('aaa')
             $('#formaddart').on('submit', function (event) {
@@ -161,70 +161,10 @@
                 })
             });
         });
-    </script>  -->
+    </script> 
 
  
-
-<!-- 
-
-    <div class="addart-form">
-     
-       
-        <div class="close">X</div>
-       
-        <div class="form_container">
-        <form  action="/create/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-          
-           <div class="upload_post_container"> 
-            <h1>Post a blog</h1>
-            
-            
-            <div class="first_block>
-
-              <label for="name">Name:</label>
-              <input type="text" name="author" id="caption" class="form-controll" required/>
-            
-    
-              <label for="title" id="titlel">Title:</label>
-              <input type="text" name="title" id="title" class="form-controll" required/>
-           
-            
-        
-            
-                <label for="caption">Description:</label>
-                <input type="text" name="description" id="caption" class="form-controll" required/>
-              
-             
-              <div class="form-group file-area">
-                <label for="images" id="imagel">Images:<span>(Images should 400x300 wide)</span></label>
-            <input type="file" name="image"  id="images" required="required"/>
-            <div class="file-dummy">
-              <div class="success">Great, your file is selected.</div>
-              <div class="default">Please upload an image</div>
-            </div> 
-          </div>
-     </div>
-     
-            <div class="content_block">
-             
-              <label for="caption">Content </label>
-              <br>
-              <textarea name="content" cols="50" rows="10" id="content" required></textarea>
-            
-          </div>
-
-        </div>
-            <div class="form-group form-button">
-              <button type="submit">Upload</button>
-              <div class="hoverbar"></div>
-            </div>
-         
-          
-          </form>
-         
-      </div> -->
-      {% endif %}
+     {% endif %}
     </div> 
 </main>
 

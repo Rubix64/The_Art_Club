@@ -1,0 +1,183 @@
+ <!-- nav bar 1 -->
+
+ <nav class="nav-bar">
+    <div class="nav-left">
+        <div class="logo"><a href="/" style="text-decoration: none; color:black;">Home</a></div>
+    </div>
+    <div class="links">
+        {% if user.is_authenticated %}
+        <div class="link">
+            <a href="/logout/?url={{request.build_absolute_uri}}">
+                LOGOUT
+            </a>
+            <div class="bar"></div>
+        </div>
+        {% else %}
+        <div class="link" id="loginlink">
+            <a>LOGIN</a>
+            <div class="bar"></div>
+        </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <div class="link" id="settingslink">
+            <a ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
+            <div class="bar"></div>
+        </div>
+        {% else %}
+        <div class="link" id="signuplink">
+            <a >SIGN UP</a>
+            <div class="bar"></div>
+        </div>
+        {%endif%}
+        
+    </div>
+</nav>
+
+<!-- login form -->
+
+<div id='login' class="login">
+    <div id="X1" class="X">X</div>
+    <h2>Login</h2>
+    <div id="loginloaderror"></div>
+    <form class="loginform" method="post" name="loginform" id="loginform" >
+    {% csrf_token %}
+        <div class="inputlogin">
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="wrong"></div>
+        <div class="inputlogin">
+            <input type="password" name="password" placeholder="Enter password" autocomplete="off" required>
+        </div>
+        <div class="wrong"></div>
+        <button type="submit" class="submitbutton" name="loginform">LOGIN</button>
+    </form>
+    <p><a href="#" id="forgotpwd">Forgot Password?</a></p>
+</div>
+
+<!-- Sign up form -->
+
+<div id="signup" class="login">
+    <div id="X2" class="X">X</div>
+    <h2>Sign up</h2>
+    <div id="loginloaderror"></div>
+    <form class="loginform" method="post" id="signupform" name="signupform" >
+    {% csrf_token %}
+        <div class="inputlogin">
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="wrong"></div>
+        <div class="inputlogin">
+            <input type="email" name="email" placeholder="Enter email" required>
+        </div>
+        <div class="wrong"></div>
+        <div class="inputlogin">
+            <input type="password" name="password" placeholder="Enter password" required autocomplete="off">
+        </div>
+        <div class="wrong"></div>
+        <div class="inputlogin">
+            <input type="password" name="confirmpassword" placeholder="Confirm password" autocomplete="off" required>
+        </div>
+        <div class="wrong"></div>
+        <button type="submit" class="submitbutton">SIGN UP</button>
+    </form>
+</div>
+
+<script>
+        
+    $(document).ready(function(){
+        // console.log("BBB");
+        $('#signupform').on('submit',function(event) {
+            event.preventDefault();
+            // console.log("signup begin");
+
+            let checkvalidity=true;
+            let pwd=signupform["password"].value;
+            let confirmpwd=signupform["confirmpassword"].value;
+            wrong.forEach(element => {
+                element.style.display='none';
+            });
+            if(pwd.length<8){
+                wrong[2].innerHTML="Password must aleast be of 8 characters";
+                wrong[2].style.display="block";
+                checkvalidity=false;
+            }
+            else if(pwd != confirmpwd){
+                wrong[3].innerHTML="Password doesn't match";
+                wrong[3].style.display='block';
+                checkvalidity=false;
+            }
+            else{
+                checkvalidity=true;
+            }
+            if(checkvalidity){
+                $data = $(this).serialize();
+                $.ajax({
+                    url: '/signup/',
+                    method:"POST",
+                    data: $data,
+                    dataType: 'json',
+                    success: function ( data ){
+                        // console.log( "client = "+ data );
+                        if(data.valid){
+                            location.reload();
+                        }
+                        else{
+                            var $wrongs=$("#signup .loginform .wrong");
+                            if(data.hasOwnProperty('username')){
+                                $($wrongs[0]).css('display', 'block');
+                                $($wrongs[0]).html(data.username);
+                            }
+                            if(data.hasOwnProperty('email')){
+                                $($wrongs[1]).css('display', 'block');
+                                $($wrongs[1]).html(data.email);
+                            }
+                            if(data.hasOwnProperty('password')){
+                                $($wrongs[3]).css('display', 'block');
+                                $($wrongs[3]).html(data.password);
+                            }
+                        }
+                    },
+                    error: function(){
+                        $loginerror=$('#signup #loginloaderror');
+                        $loginerror.css('display', 'block');
+                        $loginerror.html("Please try again!");
+                    }
+                });
+            }
+        });
+
+        $('#loginform').on('submit', function(event){
+            event.preventDefault();
+            $data = $(this).serialize();
+            $.ajax({
+                url: '/login/',
+                method: 'POST',
+                data: $data,
+                dataType: 'json',
+                success: function(data){
+                    if(data.valid) {
+                        location.reload();
+                    }
+                    else{
+                        var $wrongs=$("#login .loginform .wrong");
+                        if(data.hasOwnProperty('username')) {
+                            $($wrongs[0]).css('display', 'block');
+                            $($wrongs[0]).html(data.username);
+                        }
+                        else if(data.hasOwnProperty('password')){
+                            $($wrongs[1]).css('display', 'block');
+                            $($wrongs[1]).html(data.password);
+                         }
+                    }
+                },
+                error: function(){
+                    $loginerror=$('#login #loginloaderror');
+                    $loginerror.css('display', 'block');
+                    $loginerror.html("Please try again!");
+                }
+            });
+        })
+
+    });
+    
+</script>
