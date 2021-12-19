@@ -39,7 +39,7 @@
                 <div class="artby"></div>
                 <div class="title">{{cart_item.print.title}}</div>
                 <script>
-                    $userFirstName = '{{cart_item.user.first_name}}'
+                    $userFirstName = '{{cart_item.print.artist.first_name}}'
                     $userFirstName = $userFirstName.toUpperCase();
                     $("#{{cart_item.id}} .cart-tag .artby").html($userFirstName);
                     cartItemTitle = '{{cart_item.print.title}}'
