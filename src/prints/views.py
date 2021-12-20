@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+# from django.template.defaultfilters import linebreaksbr
 
 from .models import *
 from .forms import *
@@ -31,6 +32,7 @@ def printdata(request):
     printform=PrintForm()
     if request.method == 'POST':
         printform = PrintForm(request.POST, request.FILES)
+        # printform.description=request.POST['description'].replace('\\', '<br />')
         if printform.is_valid():
             printobj=printform.save(commit=False)
             printobj.artist=request.user

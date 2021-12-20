@@ -7,6 +7,7 @@ class PrintForm(forms.ModelForm):
     class Meta:
         model= Print
         exclude=['artist']
+    # description = forms.CharField(widget=forms.Textarea)
     def clean(self):
         cost = self.cleaned_data['cost']
         if (cost <= 0):

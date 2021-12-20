@@ -101,7 +101,7 @@
                 artby.innerHTML = '<h2>{{print.title}}</h2>';
 
                 var printDescription = document.querySelector(".image-fulldisplay .info .info-description");
-                printDescription.innerHTML = '{{print.description}}';
+                printDescription.innerHTML = `{{print.description}}`.replace(/(\r\n|\n|\r)/gm,"<br />");
 
                 var infobottom = document.querySelector(".image-fulldisplay .info .info-bottom");
                 infobottom.children[0].innerHTML = 'Art By: {{print.artist.first_name}}';
