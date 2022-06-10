@@ -40,8 +40,9 @@ let wrong=document.querySelectorAll("#signup .loginform .wrong");
 function signupvalidate(){
     let pwd=signupform["password"].value;
     let confirmpwd=signupform["confirmpassword"].value;
-    wrong[0].style.display='none';
-    wrong[1].style.display='none';
+    wrong.forEach(element=>{
+        element.style.display='none';
+    })
     if(pwd.length<8){
         wrong[0].innerHTML="Password must aleast be of 8 characters";
         wrong[0].style.display="block";
